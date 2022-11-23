@@ -25,21 +25,21 @@ class Host(db.Model):
 
     user = db.relationship('User', back_populates='hosts')
 
-    # def to_dict(self):
-    #     host_dict = {
-    #       "id": self.id,
-    #       "user_id": self.user_id,
-    #       "name": self.name,
-    #       "about": self.about,
-    #       "address": self.address,
-    #       "city": self.city,
-    #       "state": self.state,
-    #       "country": self.country,
-    #       "lat": self.lat,
-    #       "lng": self.lng,
-    #       "price_per_night": self.price_per_night,
-    #       "img_url": self.img_url,
-    #       "created_at": self.created_at,
-    #       "updated_at": self.updated_at
-    #     }
-    #     return host_dict
+    def to_dict(self):
+        host_dict = {
+          "id": self.id,
+          "user_id": self.user_id,
+          "name": self.name,
+          "about": self.about,
+          "address": self.address,
+          "city": self.city,
+          "state": self.state,
+          "country": self.country,
+          "lat": self.lat,
+          "lng": self.lng,
+          "price_per_night": self.price_per_night,
+          "img_url": self.img_url,
+          "created_at": self.created_at,
+          "updated_at": self.updated_at
+        }
+        return host_dict
