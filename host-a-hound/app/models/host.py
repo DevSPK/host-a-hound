@@ -30,6 +30,7 @@ class Host(db.Model):
         host_dict = {
           "id": self.id,
           "user_id": self.user_id,
+          "name": self.name,
           "about": self.about,
           "address": self.address,
           "city": self.city,
