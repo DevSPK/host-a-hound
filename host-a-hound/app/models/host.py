@@ -29,16 +29,17 @@ class Host(db.Model):
     def to_dict(self):
         host_dict = {
           "id": self.id,
-          "about": self.about ,
-          "address": self.address ,
-          "city": self.city ,
-          "state": self.state ,
-          "country": self.country ,
-          "lat": self.lat ,
+          "user_id": self.user_id,
+          "about": self.about,
+          "address": self.address,
+          "city": self.city,
+          "state": self.state,
+          "country": self.country,
+          "lat": self.lat,
           "lng": self.lng,
-          "price_per_night": self.price_per_night ,
-          "img_url": self.img_url ,
-          "created_at": self.created_at ,
+          "price_per_night": self.price_per_night,
+          "img_url": self.img_url,
+          "created_at": self.created_at,
           "updated_at": self.updated_at
         }
         return host_dict
