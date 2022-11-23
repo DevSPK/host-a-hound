@@ -16,6 +16,9 @@ class User(db.Model, UserMixin):
     last_name = db.Column(db.String(75), nullable=False)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    hounds = db.relationship('Hound', back_populates='user', cascade="all, delete-orphan")
+    hosts = db.relationship('Host', back_populates='user', cascade="all, delete-orphan")
+
     @property
     def password(self):
         return self.hashed_password

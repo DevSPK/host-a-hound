@@ -21,26 +21,25 @@ class Host(db.Model):
     lng = db.Column(db.Float, nullable=False, default=-77.036873)
     price_per_night = db.Column(db.Float, nullable=False)
     img_url= db.Column(db.String(2048), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime())
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime())
+
 
     user = db.relationship('User', back_populates='hosts')
 
-    def to_dict(self):
-        host_dict = {
-          "id": self.id,
-          "user_id": self.user_id,
-          "name": self.name,
-          "about": self.about,
-          "address": self.address,
-          "city": self.city,
-          "state": self.state,
-          "country": self.country,
-          "lat": self.lat,
-          "lng": self.lng,
-          "price_per_night": self.price_per_night,
-          "img_url": self.img_url,
-          "created_at": self.created_at,
-          "updated_at": self.updated_at
-        }
-        return host_dict
+    # def to_dict(self):
+    #     host_dict = {
+    #       "id": self.id,
+    #       "user_id": self.user_id,
+    #       "name": self.name,
+    #       "about": self.about,
+    #       "address": self.address,
+    #       "city": self.city,
+    #       "state": self.state,
+    #       "country": self.country,
+    #       "lat": self.lat,
+    #       "lng": self.lng,
+    #       "price_per_night": self.price_per_night,
+    #       "img_url": self.img_url,
+    #       "created_at": self.created_at,
+    #       "updated_at": self.updated_at
+    #     }
+    #     return host_dict

@@ -1,4 +1,3 @@
-
 from app.models import db, User, environment, SCHEMA, Host, Hound
 
 # Adds a demo user, you can add other users here if you want
@@ -26,7 +25,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 58.88,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-716674445310682476/original/3dbb1597-6ac6-4877-bb08-7188742b8203.jpeg"
     },
@@ -39,7 +38,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 75.44,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-715411481162208357/original/a875bbe4-8549-4ba4-abe8-179066c9a9ab.jpeg"
     },
@@ -52,7 +51,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 99.99,
         "img_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-735542330357205664/original/8b8ebac7-b4b7-43d1-a995-cc849c3179e4.jpeg"
     },
@@ -65,7 +64,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 55.25,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-715401606875304002/original/f720bb71-9bd0-42d2-abc1-9ff2817fb18a.jpeg"
     },
@@ -78,7 +77,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 80.99,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-43425222/original/f3dfdfad-00e0-4b81-93bf-50cc2167dd9a.png"
     },
@@ -91,7 +90,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 101.33,
         "img_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-722408789066131629/original/83cd6729-13ed-43a6-86fb-166eba8a03ac.jpeg"
     },
@@ -104,7 +103,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 50.00,
         "img_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-743341669591736223/original/a41885e2-99c5-42f8-b2b3-94d12434e8fd.jpeg"
     },
@@ -117,7 +116,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 75.55,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-686120619798893603/original/36deb313-d961-4cea-b9e1-045bb5907ec7.jpeg"
     },
@@ -130,7 +129,7 @@ def seed_users():
         "state": "DC",
         "country": "USA",
         "lat": 38.889248,
-        "lon": -77.050636,
+        "lng": -77.050636,
         "price_per_night": 100.25,
         "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-666128575441248875/original/814eda14-be08-4acd-8dcb-703e15efc6f9.jpeg"
     }
@@ -148,7 +147,7 @@ def seed_users():
             state=host["state"],
             country=host["country"],
             lat=host["lat"],
-            lon=host["lon"],
+            lng=host["lng"],
             price_per_night=host["price_per_night"],
             img_url=host["img_url"],
         )
