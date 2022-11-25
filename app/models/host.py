@@ -38,8 +38,6 @@ class Host(db.Model):
           "lat": self.lat,
           "lng": self.lng,
           "price_per_night": self.price_per_night,
-          "img_url": self.img_url,
-          "created_at": self.created_at,
-          "updated_at": self.updated_at
+          "img_url": self.img_url
         }
         return host_dict

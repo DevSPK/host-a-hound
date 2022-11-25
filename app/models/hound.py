@@ -29,7 +29,5 @@ class Hound(db.Model):
           "age": self.age,
           "spayed_neutered": self.spayed_neutered,
           "img_url": self.img_url,
-          "created_at": self.created_at,
-          "updated_at": self.updated_at
         }
         return hound_dict
