@@ -83,6 +83,41 @@ def create_host():
     else:
         return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
+@host_routes.put('/<int:host_id>')
+@login_required
+def edit_host(host_id):
+    """
+    Edit host by host id
+    """
+    form = CreateUpdateHostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        current_host = Host.query.get(host_id)
+
+        if current_host == None:
+            return {"message": "Host could not be found"}, 404
+
+        if current_host.user_id != int(current_user.get_id()):
+            return {"message": "Forbidden"}, 403
+
+
+        current_host.name = form.data['name']
+        current_host.about = form.data['about']
+        current_host.address = form.data['address']
+        current_host.city = form.data['city']
+        current_host.state = form.data['state']
+        current_host.country = form.data['country']
+        current_host.lat = form.data['lat']
+        current_host.lng = form.data['lng']
+        current_host.price_per_night = form.data['price_per_night']
+        current_host.img_url = form.data['img_url']
+
+        db.session.commit()
+
+        return current_host.to_dict()
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 @host_routes.delete("/<int:id>")
 @login_required
