@@ -1,0 +1,34 @@
+/* 
+<--- NavBar --->
+*/
+
+.navbar-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.navbar-position-wrapper {
+    position: relative;
+    width: 70%;
+}
+
+
+.navbar-home-link {
+    color: #fe385c;
+    font-size: 40px;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif
+}
+
+.navbar-links-wrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-end;
+}
