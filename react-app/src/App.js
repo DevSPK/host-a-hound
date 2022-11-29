@@ -3,10 +3,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import AllHosts from './components/AllHosts';
+import AddHost from './components/AddHost';
+import HostDetails from './components/HostDetails';
+import EditHost from './components/EditHost';
 import { authenticate } from './store/session';
 
 function App() {
@@ -14,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -28,20 +32,39 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
+        <Route path='/log-in' exact={true}>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
+          <Route
+          path='/add-host'
+          exact={true}>
+          <AddHost />
+        </Route>
+        <Route
+          path='/host/:hostId/edit'
+          exact={true}>
+          <EditHost />
+        </Route>
+        <Route exact path='/host/:hostId'>
+          <HostDetails />
+        </Route>
         <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
+          <UsersList />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+         <AllHosts />
+        </Route>
+        <Route exact path='/404'>
+          <h1>404 Error: Not found</h1>
+        </Route>
+        <Route exact path='/403'>
+          <h1>403 Error: Forbidden</h1>
         </Route>
       </Switch>
     </BrowserRouter>
