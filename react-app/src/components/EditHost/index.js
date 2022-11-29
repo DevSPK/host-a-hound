@@ -151,11 +151,12 @@ function EditHost() {
     setErrors([]);
 
     try {
-        const data = await dispatch(editItemThunk(updatedItem, itemId))
+        const data = await dispatch(thunkUpdateHost(newInfo))
+        
         if (data.errors) {
             await setErrors(data.errors);
         } else {
-            history.push(`/items/${itemId}`)
+            history.push(`/host/${hostId}`)
         }
     } catch (res) {
         history.push('/404')
@@ -172,13 +173,6 @@ function EditHost() {
 
   if (!editedHost) return null;
 
-
-
-  function handleUpdate(res) {
-    console.log("inside handle update$$$$$$$$$$$$$");
-   
-    history.push(`/`);
-  }
 
     
     return (
