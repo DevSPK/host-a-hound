@@ -21,7 +21,7 @@ function EditHost() {
         dispatch(thunkReadAllHosts());
     }, [dispatch, hostId]);
     
-    const hosts = useSelector((state) => state.host)
+    const hosts = useSelector((state) => Object.values(state.host))
 
     console.log("this is hosts in edit hosts", hosts)
     //   let gottenHost
@@ -39,7 +39,7 @@ function EditHost() {
 
   let normalizedHosts = {};
 
-  hosts.forEach((host) => (normalizedHosts[host.id] = host));
+  hosts?.forEach((host) => (normalizedHosts[host.id] = host));
 
   const host = normalizedHosts[hostId];
 

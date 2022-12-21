@@ -88,8 +88,13 @@ const AddHost = () => {
             name, about, price_per_night, address, city, state, country, img_url, lat, lng
         }
 
-        const host = await dispatch(thunkAddHost(hostInfo))
-        history.push(`/hosts/${host.id}`)
+        await dispatch(thunkAddHost(hostInfo))
+       
+        
+
+           await history.push(`/`)
+        
+       
     }
 
     return (

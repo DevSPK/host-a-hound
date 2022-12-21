@@ -116,9 +116,10 @@ export const thunkUpdateHost = (host) => async (dispatch) => {
            name, about, price_per_night, address, city, state, country, img_url, lat, lng
         })
     });
-
+    console.log("this is response in thunkUpdateHost", response)
     if (response.ok) {
         const data = await response.json();
+        console.log("this is data in thunkUpdateHost", data)
         dispatch(actionUpdateHost(data));
         return data;
     }
@@ -136,36 +137,41 @@ export const thunkRemoveHost = (hostId) => async (dispatch) => {
     if (response.ok) dispatch(actionDeleteHost(hostId));
 };
 
-let initialState = null
+let initialState = {}
 
 export default function hostReducer(state = initialState, action) {
     switch (action.type) {
-        case READ_ALL_HOSTS:
-            console.log("this is action.hosts", action.hosts)
-            let hosts = action.hosts
+        case READ_ALL_HOSTS: {
+
+            console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
+            
             const newState = {}
-            console.log(hosts)
-            return hosts
-        case CREATE_HOST:
-            const stateCreateHost = {...action.hosts}
-            return stateCreateHost
-        case READ_HOST:
-            const stateReadHost = {...action.hosts}
-            return stateReadHost
-        case UPDATE_HOST:
-            const stateUpdateHost = {...action.hosts}
-            return stateUpdateHost
-        case DELETE_HOST:
-            const stateDeleteHost = {...action.hosts}
-            return stateDeleteHost
-            // console.log("this is action.hosts", action.hosts)
-            // let hosts = action.hosts
-            // const newState = {}
-            // hosts.forEach((host) => {
-            //     newState[host.id] = host
-            // })
-            // console.log("this is newState in read_all_hosts", newState);
-            // return newState
+            action.hosts.forEach((host) => {
+                newState[host.id] = host;
+              });
+              return newState;
+        }
+        case READ_HOST: {
+
+            let newState = {...state}
+            newState[action.hostId]=action.host
+        }
+        case CREATE_HOST: {
+            let newState = {...state};
+            newState[action.host.id] = action.host
+            return newState
+        }
+        case UPDATE_HOST:{
+            console.log("this is action.host in UPDATE_HOST", action.host)
+            let newState = {...state};
+            newState[action.host.id]= action.host
+            return newState
+            }
+        case DELETE_HOST:{
+            let newState = {...state};
+            delete newState[action.hostId]
+            return newState
+        }
         default:
             return state
     }

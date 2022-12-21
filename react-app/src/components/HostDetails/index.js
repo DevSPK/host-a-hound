@@ -16,15 +16,15 @@ const HostDetails = () => {
   const [showDetails, setShowDetails] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
 
-  const handleDelete = (hostId) => {
-    if (
-      window.confirm(
-        "Are you sure you want to permanently delete this host?"
-      )
-    ) {
-      dispatch(thunkRemoveHost(hostId)).then(() => history.push("/"));
-    }
-  };
+  // const handleDelete = (hostId) => {
+  //   if (
+  //     window.confirm(
+  //       "Are you sure you want to permanently delete this host?"
+  //     )
+  //   ) {
+  //     dispatch(thunkRemoveHost(hostId)).then(() => history.push("/"));
+  //   }
+  // };
 
 //  useEffect(() => {
 //     async function getDetails() {
@@ -39,24 +39,30 @@ const HostDetails = () => {
 //  }, [dispatch, hostId])
 
 
+async function handleDelete(hostId) {
+  await dispatch(thunkRemoveHost(hostId));
 
- 
+ await history.push("/");
+}
 
- let hosts = useSelector((state) => state.host);
 
- console.log("this is host in hostdetails", hosts)
 
- let normalizedHosts = {};
+let hosts = useSelector((state) => Object.values(state.host));
 
-  hosts.forEach((host) => (normalizedHosts[host.id] = host));
+console.log("this is host in hostdetails", hosts)
 
-  console.log("this is hosts after normalized", normalizedHosts)
+let normalizedHosts = {};
 
- const host = normalizedHosts[hostId]
+hosts.forEach((host) => (normalizedHosts[host.id] = host));
 
- let hostDetailButtons = null
+console.log("this is hosts after normalized", normalizedHosts)
 
- 
+const host = normalizedHosts[hostId]
+
+let hostDetailButtons = null
+
+if (!host) return null
+
 
 if (sessionUser.id === host.user_id) {
 
@@ -72,7 +78,7 @@ if (sessionUser.id === host.user_id) {
     hostDetailButtons = null
 }
 
- if (!host) return null
+ 
 
     return (
         <div className="hostdetails-wrapper">

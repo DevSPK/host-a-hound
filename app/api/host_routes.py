@@ -94,7 +94,7 @@ def edit_host(host_id):
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         current_host = Host.query.get(host_id)
-
+        print(current_host)
         if current_host == None:
             return {"message": "Host could not be found"}, 404
 
