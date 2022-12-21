@@ -22,6 +22,8 @@ function EditHost() {
     }, [dispatch, hostId]);
     
     const hosts = useSelector((state) => state.host)
+
+    console.log("this is hosts in edit hosts", hosts)
     //   let gottenHost
 
     //   async function getHost(hostId) {
@@ -33,9 +35,11 @@ function EditHost() {
 
     //   console.log("this is gottenHost", gottenHost)
 
+  
+
   let normalizedHosts = {};
 
-  hosts?.forEach((host) => (normalizedHosts[host.id] = host));
+  hosts.forEach((host) => (normalizedHosts[host.id] = host));
 
   const host = normalizedHosts[hostId];
 
