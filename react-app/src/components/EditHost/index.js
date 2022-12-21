@@ -39,7 +39,7 @@ function EditHost() {
 
   let normalizedHosts = {};
 
-  hosts.forEach((host) => (normalizedHosts[host.id] = host));
+  hosts?.forEach((host) => (normalizedHosts[host.id] = host));
 
   const host = normalizedHosts[hostId];
 

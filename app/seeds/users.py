@@ -3,11 +3,11 @@ from app.models import db, User, environment, SCHEMA, Host, Hound
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='demo', email='demo@aa.io', password='password', first_name="Fred", last_name="Flintstone")
+        username='demo', email='demo@aa.io', password='password')
     wilma = User(
-        username='wilma', email='wilma@aa.io', password='password', first_name="Wilma", last_name="Flintstone")
+        username='wilma', email='wilma@aa.io', password='password')
     barney = User(
-        username='barney', email='barney@aa.io', password='password', first_name="Barney", last_name="Rubble")
+        username='barney', email='barney@aa.io', password='password')
 
     users = [demo, wilma, barney]
 
