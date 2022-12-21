@@ -1,6 +1,6 @@
 const CREATE_HOST = "host/CREATE_HOST";
 const READ_HOST = "host/READ_HOST";
-const READ_ALL_HOSTS = "host/READ_ALL_HOSTS";
+const GET_ALL_HOSTS = "host/GET_ALL_HOSTS";
 const UPDATE_HOST = "host/UPDATE_HOST";
 const DELETE_HOST = "host/DELETE_HOST";
 
@@ -17,8 +17,8 @@ export const actionReadHost = (hostId) => {
     };
 };
 
-export const actionReadAllHosts = (hosts) => ({
-    type: READ_ALL_HOSTS,
+export const actionGetAllHosts = (hosts) => ({
+    type: GET_ALL_HOSTS,
     hosts
 });
 
@@ -34,7 +34,7 @@ export const actionDeleteHost = (hostId) => ({
 
 
 
-export const thunkReadAllHosts = () => async (dispatch) => {
+export const thunkGetAllHosts = () => async (dispatch) => {
     const response = await fetch("/api/host/", {
         method: "GET"
     });
@@ -49,8 +49,12 @@ export const thunkReadAllHosts = () => async (dispatch) => {
         	"this is hosts.hosts from thunkReadAllHosts",
         	hosts.hosts
         );
-        dispatch(actionReadAllHosts(hosts.hosts));
-        return
+        let normalizedHosts = {}
+        hosts.hosts.forEach(host => {
+            normalizedHosts[host.id] = host
+        })
+        dispatch(actionGetAllHosts(normalizedHosts));
+        return hosts
     } else if (response.status === 404) {
         throw Error('404')
     } else {
@@ -119,8 +123,8 @@ export const thunkUpdateHost = (host) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log("this is data", data)
         dispatch(actionUpdateHost(data));
-        return data;
     }
 };
 
@@ -140,23 +144,29 @@ let initialState = null
 
 export default function hostReducer(state = initialState, action) {
     switch (action.type) {
-        case READ_ALL_HOSTS:
-            console.log("this is action.hosts", action.hosts)
-            let hosts = action.hosts
-            const newState = {}
-            console.log(hosts)
-            return hosts
+        case GET_ALL_HOSTS:
+            // console.log("this is action.hosts", action.hosts)
+            // let hosts = action.hosts
+            // const newState = {}
+            // console.log(hosts)
+            // return hosts
+            const stateGetAllHosts = {...action.hosts}
+            console.log("this is stateGetAllHosts", stateGetAllHosts)
+            return stateGetAllHosts
         case CREATE_HOST:
-            const stateCreateHost = {...action.hosts}
+            const stateCreateHost = action.hosts
             return stateCreateHost
         case READ_HOST:
-            const stateReadHost = {...action.hosts}
+            const stateReadHost = action.hosts
             return stateReadHost
         case UPDATE_HOST:
-            const stateUpdateHost = {...action.hosts}
-            return stateUpdateHost
+            // let newState = {...state}
+            // newState[action.host.id] = action.host
+            // return newState
+            const stateUpdatedHost = action.hosts
+            return stateUpdatedHost
         case DELETE_HOST:
-            const stateDeleteHost = {...action.hosts}
+            const stateDeleteHost = action.hosts
             return stateDeleteHost
             // console.log("this is action.hosts", action.hosts)
             // let hosts = action.hosts

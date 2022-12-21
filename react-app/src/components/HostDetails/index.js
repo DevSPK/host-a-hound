@@ -1,10 +1,10 @@
 //  HostDetails/index.js
 
-import { useLayoutEffect } from "react";
-import { useEffect, useState, useRef } from "react";
+
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { thunkGetOneHost, thunkReadAllHosts, thunkRemoveHost } from "../../store/host";
+import { thunkGetAllHosts, thunkRemoveHost } from "../../store/host";
 
 
 
@@ -13,8 +13,13 @@ const HostDetails = () => {
     const {hostId} = useParams();
     const dispatch = useDispatch();
   const history = useHistory();
-  const [showDetails, setShowDetails] = useState(false)
+//   const [showDetails, setShowDetails] = useState(false)
   const sessionUser = useSelector((state) => state.session.user);
+
+  useEffect(() => {
+    dispatch(thunkGetAllHosts());
+}, [dispatch, hostId]);
+
 
   const handleDelete = (hostId) => {
     if (
@@ -25,6 +30,8 @@ const HostDetails = () => {
       dispatch(thunkRemoveHost(hostId)).then(() => history.push("/"));
     }
   };
+
+
 
 //  useEffect(() => {
 //     async function getDetails() {
@@ -44,15 +51,15 @@ const HostDetails = () => {
 
  let hosts = useSelector((state) => state.host);
 
- console.log("this is host in hostdetails", hosts)
+//  console.log("this is host in hostdetails", hosts)
 
- let normalizedHosts = {};
+//  let normalizedHosts = {};
 
-  hosts.forEach((host) => (normalizedHosts[host.id] = host));
+//   hosts.forEach((host) => (normalizedHosts[host.id] = host));
 
-  console.log("this is hosts after normalized", normalizedHosts)
+//   console.log("this is hosts after normalized", normalizedHosts)
 
- const host = normalizedHosts[hostId]
+ const host = hosts[hostId]
 
  let hostDetailButtons = null
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, Link } from "react-router-dom"
-import { thunkReadAllHosts } from "../../store/host"
+import { thunkGetAllHosts } from "../../store/host"
 import "./AllHosts.css"
 
 const AllHosts = () => {
@@ -11,13 +11,20 @@ const AllHosts = () => {
     // const [isLoaded, setIsLoaded] = useState(false)
     const user = useSelector((state) => state.session.user)
     
-    const hosts = useSelector((state) => state.host)
-
+    console.log(user)
+    
     
     useEffect( () => {
-        dispatch(thunkReadAllHosts())
-    }, [dispatch])
+        dispatch(thunkGetAllHosts())
+    }, [dispatch, user])
+
     
+
+    const testhosts = useSelector((state => state.host))
+    console.log("this is testhosts", testhosts)
+    
+    const hosts = useSelector((state) => Object.values(state.host))
+   
     if (!hosts) return null
     
     
@@ -47,6 +54,7 @@ const AllHosts = () => {
             </div>
     
 );
-    };
+
+};
 
 export default AllHosts

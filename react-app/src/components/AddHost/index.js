@@ -23,12 +23,12 @@ const AddHost = () => {
     const history = useHistory()
     const user = useSelector((state) => state.session.user)
 
-    useEffect(() => {
-        if (!user) {
-            history.push('/')
-            return
-        }
-    }, [user])
+    // useEffect(() => {
+    //     if (!user) {
+    //         history.push('/')
+    //         return
+    //     }
+    // }, [user])
 
     useEffect(() => {
         let errorsArr = []

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import {thunkUpdateHost}  from '../../store/host'
-import { thunkReadAllHosts } from '../../store/host'
+import { thunkGetAllHosts } from '../../store/host'
 import { thunkGetOneHost } from '../../store/host'
 import './EditHost.css'
 
@@ -18,8 +18,10 @@ function EditHost() {
     
     
     useEffect(() => {
-        dispatch(thunkReadAllHosts());
+        dispatch(thunkGetAllHosts());
     }, [dispatch, hostId]);
+
+
     
     const hosts = useSelector((state) => state.host)
     //   let gottenHost
@@ -33,11 +35,7 @@ function EditHost() {
 
     //   console.log("this is gottenHost", gottenHost)
 
-  let normalizedHosts = {};
-
-  hosts?.forEach((host) => (normalizedHosts[host.id] = host));
-
-  const host = normalizedHosts[hostId];
+  const host = hosts[hostId];
 
   if (host.user_id !== sessionUser.id) {
     history.push("/403")
@@ -152,7 +150,7 @@ function EditHost() {
 
     try {
         const data = await dispatch(thunkUpdateHost(newInfo))
-        
+
         if (data.errors) {
             await setErrors(data.errors);
         } else {
