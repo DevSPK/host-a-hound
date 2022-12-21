@@ -21,7 +21,7 @@ function EditHost() {
         dispatch(thunkReadAllHosts());
     }, [dispatch, hostId]);
     
-    const hosts = useSelector((state) => state.host)
+    const hosts = useSelector((state) => Object.values(state.host))
 
     console.log("this is hosts in edit hosts", hosts)
     //   let gottenHost

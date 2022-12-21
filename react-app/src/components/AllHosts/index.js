@@ -11,14 +11,14 @@ const AllHosts = () => {
     // const [isLoaded, setIsLoaded] = useState(false)
     const user = useSelector((state) => state.session.user)
     
-    const hosts = useSelector((state) => state.host)
+    const hosts = useSelector((state) => Object.values(state.host))
 
     
     useEffect( () => {
         dispatch(thunkReadAllHosts())
     }, [dispatch])
     
-    if (!hosts) return null
+    // if (hosts.length === 0) return null
     
     
 
@@ -26,7 +26,7 @@ const AllHosts = () => {
     
     console.log("this is hosts in allhosts", hosts)
 
-    console.log("this is hosts mapped", hosts.map((host) => host))
+    // console.log("this is hosts mapped", hosts.map((host) => host))
 
     
     return (
