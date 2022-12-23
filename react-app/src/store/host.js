@@ -164,7 +164,7 @@ export default function hostReducer(state = initialState, action) {
         case UPDATE_HOST:{
             console.log("this is action.host in UPDATE_HOST", action.host)
             let newState = {...state};
-            newState[action.host.id]= action.host
+            newState[action.host.id] = action.host
             return newState
             }
         case DELETE_HOST:{
