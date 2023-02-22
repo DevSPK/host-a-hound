@@ -38,10 +38,7 @@ export const thunkReadAllHosts = () => async (dispatch) => {
     const response = await fetch("/api/host/", {
         method: "GET"
     });
-    // console.log(
-    // 	"This is response from thunkReadAllGroups",
-    // 	response
-    // );
+   
     if (response.ok) {
         const hosts = await response.json();
 
@@ -129,10 +126,6 @@ export const thunkRemoveHost = (hostId) => async (dispatch) => {
     const response = await fetch(`/api/host/${hostId}`, {
         method: "DELETE"
     });
-    // console.log(
-    // 	"this is response from remove Group",
-    // 	response
-    // );
 
     if (response.ok) dispatch(actionDeleteHost(hostId));
 };
@@ -164,7 +157,7 @@ export default function hostReducer(state = initialState, action) {
         case UPDATE_HOST:{
             console.log("this is action.host in UPDATE_HOST", action.host)
             let newState = {...state};
-            newState[action.host.id]= action.host
+            newState[action.host.id] = action.host
             return newState
             }
         case DELETE_HOST:{

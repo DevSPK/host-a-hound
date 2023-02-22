@@ -12,6 +12,7 @@ import AddHost from './components/AddHost';
 import HostDetails from './components/HostDetails';
 import EditHost from './components/EditHost';
 import { authenticate } from './store/session';
+import AllHounds from './components/AllHounds';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -57,6 +58,9 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
+        <Route path="/hounds" exact={true}>
+          <AllHounds />
+        </Route>
         <Route path='/' exact={true} >
          <AllHosts />
         </Route>
