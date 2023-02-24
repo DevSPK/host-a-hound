@@ -10,6 +10,7 @@
     margin-right: 5%;
     margin-top: 20px;
     margin-bottom: 20px;
+    
 }
 
 .navbar-position-wrapper {
@@ -26,9 +27,9 @@
     font-family: 'Roboto', sans-serif
 }
 
-.navbar-links-wrapper {
+.navbar-link-wrapper {
     display: flex;
-    gap: 5px;
+   
     align-items: center;
     justify-content: flex-end;
 }

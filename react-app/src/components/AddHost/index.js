@@ -104,7 +104,7 @@ const AddHost = () => {
                 {errors.length > 0 && submitted && <ul className="add-host-form-errors">
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>}
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         Name
                     </label>
@@ -117,7 +117,7 @@ const AddHost = () => {
                         maxLength={75}
                     />
                 </div>
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         Address
                     </label>
@@ -130,7 +130,7 @@ const AddHost = () => {
                         maxLength={150}
                     />
                 </div>
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         City
                     </label>
@@ -143,7 +143,7 @@ const AddHost = () => {
                         maxLength={75}
                     />
                 </div>
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         State
                     </label>
@@ -156,7 +156,7 @@ const AddHost = () => {
                         maxLength={25}
                     />
                 </div>
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         Country
                     </label>
@@ -169,10 +169,10 @@ const AddHost = () => {
                         maxLength={50}
                     />
                 </div>
-                <div>
-                    <label>
+                <div className="add-host-form-item">
+                    {/* <label>
                         Image URL
-                    </label>
+                    </label> */}
                     <input
                         type="text"
                         value={img_url}
@@ -180,13 +180,15 @@ const AddHost = () => {
                         required
                         minLength={1}
                         maxLength={2048}
+                        placeholder="Image URL"
                     />
                 </div>
-                <div>
+                <div className="add-host-form-item">
                     <label>
                         Price per night
                     </label>
                     <input
+                        placeholder="Price per night"
                         type="number"
                         step="0.01"
                         value={price_per_night}
@@ -195,10 +197,7 @@ const AddHost = () => {
                         min={0.01}
                     />
                 </div>
-                <div>
-                    <label>
-                        About your host
-                    </label>
+                <div className="add-host-form-item">
                     <textarea
                         type="text"
                         value={about}
@@ -206,12 +205,13 @@ const AddHost = () => {
                         required
                         minLength={1}
                         maxLength={2000}
+                        placeholder="About your host"
                     />
                 </div>
                
-                <button type='submit'>Create host</button>
+                <button className="add-host-form-item submit-btn" type='submit'>Create host</button>
+            <button className='cancel-btn add-host-form-item' onClick={() => history.push(`/`)}>Cancel</button>
             </form>
-            <button className='cancel-btn' onClick={() => history.push(`/`)}>Cancel</button>
         </div>
     )
 }

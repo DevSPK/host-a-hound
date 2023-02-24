@@ -49,6 +49,11 @@ const ProfileMenu = () => {
     let profileDetails
     if (sessionUser) {
         profileDetails = (
+            <div className='navbar-profile-sessionuser-wrapper'>
+
+                <NavLink to='/add-host' activeClassName='active' className='profile-add-host-link'>
+                    Add host
+                        </NavLink>
             <div className='profile-wrapper'>
                 <button className="profile-button" onClick={openProfileMenu}>
                     <span><i className="fas fa-user-circle" /> <i className="fa-solid fa-caret-down" /> </span>
@@ -56,11 +61,18 @@ const ProfileMenu = () => {
                 <div className='profile-menu-wrapper'>
                     <div className={showProfileMenu}>
                         <div className='profile-menu-header'>
-                            <i className="fas fa-user-circle" />
-                            <span> </span>
-                            {sessionUser.username}
-                            {sessionUser.email}
+                            {/* <i className="fas fa-user-circle" /> */}
+                            <span className='profile-menu-userinfo'> 
+                            <div> 
+                                {sessionUser.username}
+                                </div>
+                            <div>
+                                {sessionUser.email}
+                                </div>
+                            </span>
                         </div>
+                        <div className="profile-menu-navlinks">
+
                         <NavLink to={`/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
                             <i className="fa-solid fa-list" /> Your hosts
                         </NavLink>
@@ -74,9 +86,12 @@ const ProfileMenu = () => {
                             <i className="fa-regular fa-star" /> Your reviews
                         </NavLink> */}
                         <LogoutButton />
+                        </div>
                     </div>
                 </div>
             </div >
+            </div>
+            
         )
     } else {
         profileDetails = (

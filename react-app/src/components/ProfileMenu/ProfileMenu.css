@@ -1,7 +1,7 @@
-.profile-relative-wrapper {
+/* .profile-relative-wrapper {
     position: relative;
     width: 70%;
-}
+} */
 
 .profile-button {
     font-size: 20px;
@@ -72,6 +72,9 @@
     box-sizing: border-box;
 }
 
+.navbar-profile.sessionuser-wrapper {
+    display: flex;
+}
 
 .profile-hidden {
     display: none;
@@ -81,10 +84,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
+    position: relative;
     z-index: 1;
-    top: 25px;
-    right: 60px;
     background-color: white;
     width: 200px;
     border-radius: 10px;
@@ -133,7 +134,9 @@
     color: gray;
 }
 
-
+.profile-add-host-link {
+    width: 15%;
+}
 
 
 
@@ -143,4 +146,24 @@
 
 .profile-menu-item>span {
     margin-left: 4px;
+}
+
+.navbar-profile-sessionuser-wrapper {
+    display: flex;
+   width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.profile-menu-userinfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-menu-navlinks {
+    display: flex;
+    flex-direction: column;
 }
