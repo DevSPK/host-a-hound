@@ -56,54 +56,74 @@ const AddHost = () => {
         //     });
         //   }
 
-        function isImgUrl(url) {
-            return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
-          }
         
-
+        
         if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
-        if (name && name.length > 75) errorsArr.push("Host name must be less than 75 characters")
-        if (address && address.length > 150) errorsArr.push("Host address must be less than 150 characters")
-        if (city && city.length > 75) errorsArr.push("Host city must be less than 75 characters")
-        if (state && state.length > 25) errorsArr.push("Host state must be less than 25 characters")
-        if (country && country.length > 50) errorsArr.push("Host country must be less than 50 characters")
-        if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
-        if (about && about.length > 2000) errorsArr.push("Host about must be less than 2000 characters")
+        if (name && (name.length < 5 || name.length > 75)) errorsArr.push("Host name must be between 5 and 75 characters")
+        if (address && (address.length < 10 || address.length) > 150) errorsArr.push("Host address must be between 10 and 150 characters")
+        if (city && (city.length < 5 ||  city.length > 75)) errorsArr.push("Host city must be between 5 and 75 characters")
+        if (state && (state.length < 2 || state.length > 25)) errorsArr.push("Host state must be between 2 and 25 characters")
+        if (country && (country.length < 2 || country.length > 50)) errorsArr.push("Host country must be between 2 and 50 characters")
+        if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")
+        if (about && (about.length < 10 || about.length > 2000)) errorsArr.push("About must be at least 10 characters and less than 2000 characters")
         if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
         
+       
 
         setErrors(errorsArr)
     }, [name, about, price_per_night, address, city, state, country, img_url])
 
+    function isImgUrl(url) {
+
+        let checkURL = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(url)
+        
+        if (url === null) {
+            return false
+        }
+        console.log(checkURL)
+
+        if (checkURL) {
+            return true
+        }
+
+        else {return false}
+      }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        if (errors.length) {
+
+        if (errors.length === 0) {
+            let hostInfo = {
+                name, about, price_per_night, address, city, state, country, img_url, lat, lng
+            }
+    
             setSubmitted(true)
-            return
-        }
-
-        
-
-        let hostInfo = {
-            name, about, price_per_night, address, city, state, country, img_url, lat, lng
-        }
-
-        await dispatch(thunkAddHost(hostInfo))
+            await dispatch(thunkAddHost(hostInfo))
        
         
 
-           await history.push(`/`)
+            await history.push(`/`)
+            return
+        } else {
+            return setErrors(errors)
+        }
+
+        
+
+        
+        
         
        
     }
 
+    console.log("these are errors", errors)
     return (
         <div className="add-host-form-wrapper">
             <form onSubmit={handleSubmit} className='add-host-form'>
                 <h1>Add a new host</h1>
-                {errors.length > 0 && submitted && <ul className="add-host-form-errors">
+                {/* {errors.length > 0 && <ul className="add-host-form-errors">
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>}
+                </ul>} */}
                 <div className="add-host-form-item">
                     <label>
                         Name
@@ -208,8 +228,12 @@ const AddHost = () => {
                         placeholder="About your host"
                     />
                 </div>
-               
+                {errors.length > 0 && <ul className="add-host-form-errors">
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>}
+                {errors.length === 0 && 
                 <button className="add-host-form-item submit-btn" type='submit'>Create host</button>
+                }
             <button className='cancel-btn add-host-form-item' onClick={() => history.push(`/`)}>Cancel</button>
             </form>
         </div>

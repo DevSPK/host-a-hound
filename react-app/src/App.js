@@ -39,16 +39,16 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-          <Route
+          <ProtectedRoute
           path='/add-host'
           exact={true}>
           <AddHost />
-        </Route>
-        <Route
+        </ProtectedRoute>
+        <ProtectedRoute
           path='/host/:hostId/edit'
           exact={true}>
           <EditHost />
-        </Route>
+        </ProtectedRoute>
         <Route exact path='/host/:hostId'>
           <HostDetails />
         </Route>
