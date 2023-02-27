@@ -29,6 +29,24 @@ export const actionDeleteHound = (houndId) => ({
     houndId
 });
 
+export const thunkReadAllHounds = () => async (dispatch) => {
+    const response = await fetch("/api/hound/", {
+        method: "GET"
+    });
+    if (response.ok) {
+        const hounds = await response.json();
+         console.log("this is hounds.hounds from thunkReadALLHounds", hounds.hounds)
+
+
+        dispatch(actionReadAllHounds(hounds.hounds));
+        return
+    } else if (response.status === 404) {
+        throw Error('404')
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+};
+
 export const thunkAddHound = (hound) => async (dispatch) => {
     const {name, description, age, spayed_neutered, img_url} = hound;
 
@@ -69,21 +87,6 @@ export const thunkGetOneHound = (houndId) => async (dispatch) => {
     }
 };
 
-export const thunkReadAllHounds = () => async (dispatch) => {
-    const response = await fetch("/api/hound/", {
-        method: "GET"
-    });
-    if (response.ok) {
-        const hounds = await response.json();
-
-        dispatch(actionReadAllHounds(hounds.hounds));
-        return
-    } else if (response.status === 404) {
-        throw Error('404')
-    } else {
-        return ['An error occurred. Please try again.']
-    }
-};
 
 export const thunkUpdateHound = (hound) => async (dispatch) => {
     const {id, name, description, age, spayed_neutered, img_url} = hound;
@@ -122,6 +125,9 @@ let initialState = {}
 export default function houndReducer(state = initialState, action) {
     switch (action.type) {
         case READ_ALL_HOUNDS: {
+
+            console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
+
             const newState = {}
             action.hounds.forEach((hound) => {
                 newState[hound.id] = hound;
@@ -130,7 +136,7 @@ export default function houndReducer(state = initialState, action) {
         }
         case READ_HOUND: {
             let newState = {...state}
-            newState[action.hostId]=action.hound
+            newState[action.houndId]=action.hound
         }
         case CREATE_HOUND: {
             let newState = {...state};
