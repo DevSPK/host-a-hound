@@ -113,7 +113,7 @@ export const thunkUpdateHound = (hound) => async (dispatch) => {
     }
 };
 
-export const thunkRemoveHounds = (houndId) => async (dispatch) => {
+export const thunkRemoveHound = (houndId) => async (dispatch) => {
     const response = await fetch(`/api/hound/${houndId}`, {
         method: "DELETE"
     });
@@ -152,7 +152,7 @@ export default function houndReducer(state = initialState, action) {
             }
         case DELETE_HOUND:{
             let newState = {...state};
-            delete newState[action.hostId]
+            delete newState[action.houndId]
             return newState
         }
         default:
