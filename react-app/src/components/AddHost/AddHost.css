@@ -24,3 +24,7 @@
     flex-direction: column;
 
 }
+
+.add-host-form-errors {
+    color: red;
+}

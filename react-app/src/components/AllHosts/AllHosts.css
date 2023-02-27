@@ -15,7 +15,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-   
+    position: absolute;
 }
 
 .allhosts-host-card-container {
@@ -25,4 +25,16 @@
   margin: 9px;
   margin-bottom: 20px;
   cursor: pointer;
+}
+
+.allhosts-host-name {
+    font-weight: 500;
+}
+
+.allhosts-host-city-state {
+    font-weight: 100;
+}
+
+.allhosts-host-price {
+    font-weight: 100;
 }
