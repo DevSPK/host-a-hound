@@ -18,7 +18,7 @@ const AllHounds = () => {
         dispatch(thunkReadAllHounds())
     }, [dispatch])
     
-    if (hounds.length === 0) return null
+    // if (hounds.length === 0) return null
     
     
 
@@ -37,8 +37,7 @@ const AllHounds = () => {
                     <Link to={`/hound/${hound.id}`}>
                     <div className="allhounds-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
                     <div className="allhounds-hound-info">
-                        <div className="allhounds-hound-name">{hound.name}</div>
-                        
+                        <div className="allhounds-hound-name">{hound.name}</div> 
                     </div>
                     </Link>
                 </div>  

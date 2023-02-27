@@ -1,5 +1,5 @@
-const CREATE_HOUND = "hound/CREATE_HOST";
-const READ_HOUND = "hound/READ_HOST";
+const CREATE_HOUND = "hound/CREATE_HOUND";
+const READ_HOUND = "hound/READ_HOUND";
 const READ_ALL_HOUNDS = "hound/READ_ALL_HOUNDS";
 const UPDATE_HOUND = "hound/UPDATE_HOUND";
 const DELETE_HOUND = "hound/DELETE_HOUND";
@@ -50,7 +50,7 @@ export const thunkReadAllHounds = () => async (dispatch) => {
 export const thunkAddHound = (hound) => async (dispatch) => {
     const {name, description, age, spayed_neutered, img_url} = hound;
 
-    const houndResponse = await fetch("api/hound", {
+    const houndResponse = await fetch("api/hound/", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -59,6 +59,8 @@ export const thunkAddHound = (hound) => async (dispatch) => {
             name, description, age, spayed_neutered, img_url
         })
     });
+
+    console.log("this is hound response", houndResponse)
 
     if (houndResponse.ok) {
         const data = await houndResponse.json();
@@ -128,7 +130,7 @@ export default function houndReducer(state = initialState, action) {
 
             console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
 
-            const newState = {}
+            const newState = {...state}
             action.hounds.forEach((hound) => {
                 newState[hound.id] = hound;
               });

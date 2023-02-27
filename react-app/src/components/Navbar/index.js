@@ -10,6 +10,8 @@ const NavBar = () => {
       <NavLink to='/' exact={true} activeClassName='active' className="navbar-home-link">
         host-a-hound
       </NavLink>
+      <NavLink to='/' exact={true} className="navbar-hosts">hosts</NavLink>
+      <NavLink to='/hounds' exact={true} className="navbar-hounds">hounds</NavLink>
       <div className='navbar-position-wrapper'>
         <div className="navbar-link-wrapper">
           <ProfileMenu />

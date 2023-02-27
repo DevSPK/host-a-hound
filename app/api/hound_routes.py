@@ -46,9 +46,10 @@ def create_hound():
     """
     form = CreateUpdateHoundForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print("!!!!!!!!!!!this form.validate_on_submit", form.validate_on_submit())
     if form.validate_on_submit():
         new_hound = Hound(
-            user_id=current_user.get_id(),
+            owner_id=current_user.get_id(),
             name=form.data["name"],
             description=form.data["description"],
             age=form.data["age"],
@@ -106,7 +107,7 @@ def delete_hound(id):
     if current_hound == None:
         return {"message": "Hound could not be found"}, 404
 
-    if current_hound.user_id != int(current_user.get_id()):
+    if current_hound.owner_id != int(current_user.get_id()):
         return {"message": "Forbidden"}, 403
 
     db.session.delete(current_hound)
