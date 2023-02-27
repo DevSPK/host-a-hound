@@ -190,9 +190,9 @@ const AddHost = () => {
                     />
                 </div>
                 <div className="add-host-form-item">
-                    {/* <label>
+                    <label>
                         Image URL
-                    </label> */}
+                    </label>
                     <input
                         type="text"
                         value={img_url}
@@ -200,7 +200,7 @@ const AddHost = () => {
                         required
                         minLength={1}
                         maxLength={2048}
-                        placeholder="Image URL"
+                        // placeholder="Image URL"
                     />
                 </div>
                 <div className="add-host-form-item">
@@ -208,7 +208,7 @@ const AddHost = () => {
                         Price per night
                     </label>
                     <input
-                        placeholder="Price per night"
+                        // placeholder="Price per night"
                         type="number"
                         step="0.01"
                         value={price_per_night}
@@ -218,6 +218,9 @@ const AddHost = () => {
                     />
                 </div>
                 <div className="add-host-form-item">
+                <label>
+                        About your host
+                    </label>
                     <textarea
                         type="text"
                         value={about}
@@ -225,7 +228,7 @@ const AddHost = () => {
                         required
                         minLength={1}
                         maxLength={2000}
-                        placeholder="About your host"
+                        // placeholder="About your host"
                     />
                 </div>
                 {errors.length > 0 && <ul className="add-host-form-errors">
