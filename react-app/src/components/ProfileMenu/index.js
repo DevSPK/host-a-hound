@@ -51,9 +51,13 @@ const ProfileMenu = () => {
         profileDetails = (
             <div className='navbar-profile-sessionuser-wrapper'>
 
-                <NavLink to='/add-host' activeClassName='active' className='profile-add-host-link'>
+                <NavLink to='/add-host' activeClassName='active' className='profile-add-link'>
                     Add host
                         </NavLink>
+                <NavLink to='/add-hound' activeClassName='active' className='profile-add-link'>
+                    Add hound
+                        </NavLink>
+
             <div className='profile-wrapper'>
                 <button className="profile-button" onClick={openProfileMenu}>
                     <span><i className="fas fa-user-circle" /> <i className="fa-solid fa-caret-down" /> </span>

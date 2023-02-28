@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, Link } from "react-router-dom"
-import { thunkReadAllHounds } from "../../store/hound.js"
+import { thunkReadAllHounds } from "../../store/hound"
 import "./AllHounds.css"
 
 const AllHounds = () => {
@@ -11,14 +11,14 @@ const AllHounds = () => {
     // const [isLoaded, setIsLoaded] = useState(false)
     const user = useSelector((state) => state.session.user)
     
-    const hounds = useSelector((state) => Object.values(state.hounds))
+    const hounds = useSelector((state) => Object.values(state.hound))
 
     
     useEffect( () => {
         dispatch(thunkReadAllHounds())
     }, [dispatch])
     
-    // if (hosts.length === 0) return null
+    // if (hounds.length === 0) return null
     
     
 
@@ -26,7 +26,7 @@ const AllHounds = () => {
     
     console.log("this is hounds in allhounds", hounds)
 
-    // console.log("this is hosts mapped", hosts.map((host) => host))
+    console.log("this is hounds mapped", hounds.map((hound) => hound))
 
     
     return (
@@ -37,9 +37,7 @@ const AllHounds = () => {
                     <Link to={`/hound/${hound.id}`}>
                     <div className="allhounds-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
                     <div className="allhounds-hound-info">
-                        <div className="allhounds-hound-name">{hound.name}</div>
-                        <div className="allhounds-hound-city-state">{hound.city}, {hound.state}</div>
-                        <div className="allhounds-hound-price">${hound.price_per_night} night</div>
+                        <div className="allhounds-hound-name">{hound.name}</div> 
                     </div>
                     </Link>
                 </div>  

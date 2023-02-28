@@ -1,5 +1,5 @@
-const CREATE_HOUND = "hound/CREATE_HOST";
-const READ_HOUND = "hound/READ_HOST";
+const CREATE_HOUND = "hound/CREATE_HOUND";
+const READ_HOUND = "hound/READ_HOUND";
 const READ_ALL_HOUNDS = "hound/READ_ALL_HOUNDS";
 const UPDATE_HOUND = "hound/UPDATE_HOUND";
 const DELETE_HOUND = "hound/DELETE_HOUND";
@@ -29,10 +29,28 @@ export const actionDeleteHound = (houndId) => ({
     houndId
 });
 
+export const thunkReadAllHounds = () => async (dispatch) => {
+    const response = await fetch("/api/hound/", {
+        method: "GET"
+    });
+    if (response.ok) {
+        const hounds = await response.json();
+         console.log("this is hounds.hounds from thunkReadALLHounds", hounds.hounds)
+
+
+        dispatch(actionReadAllHounds(hounds.hounds));
+        return
+    } else if (response.status === 404) {
+        throw Error('404')
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+};
+
 export const thunkAddHound = (hound) => async (dispatch) => {
     const {name, description, age, spayed_neutered, img_url} = hound;
 
-    const houndResponse = await fetch("api/hound", {
+    const houndResponse = await fetch("api/hound/", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -41,6 +59,8 @@ export const thunkAddHound = (hound) => async (dispatch) => {
             name, description, age, spayed_neutered, img_url
         })
     });
+
+    console.log("this is hound response", houndResponse)
 
     if (houndResponse.ok) {
         const data = await houndResponse.json();
@@ -69,21 +89,6 @@ export const thunkGetOneHound = (houndId) => async (dispatch) => {
     }
 };
 
-export const thunkReadAllHounds = () => async (dispatch) => {
-    const response = await fetch("/api/hound/", {
-        method: "GET"
-    });
-    if (response.ok) {
-        const hounds = await response.json();
-
-        dispatch(actionReadAllHounds(hounds.hounds));
-        return
-    } else if (response.status === 404) {
-        throw Error('404')
-    } else {
-        return ['An error occurred. Please try again.']
-    }
-};
 
 export const thunkUpdateHound = (hound) => async (dispatch) => {
     const {id, name, description, age, spayed_neutered, img_url} = hound;
@@ -108,7 +113,7 @@ export const thunkUpdateHound = (hound) => async (dispatch) => {
     }
 };
 
-export const thunkRemoveHounds = (houndId) => async (dispatch) => {
+export const thunkRemoveHound = (houndId) => async (dispatch) => {
     const response = await fetch(`/api/hound/${houndId}`, {
         method: "DELETE"
     });
@@ -122,7 +127,10 @@ let initialState = {}
 export default function houndReducer(state = initialState, action) {
     switch (action.type) {
         case READ_ALL_HOUNDS: {
-            const newState = {}
+
+            console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
+
+            const newState = {...state}
             action.hounds.forEach((hound) => {
                 newState[hound.id] = hound;
               });
@@ -130,7 +138,7 @@ export default function houndReducer(state = initialState, action) {
         }
         case READ_HOUND: {
             let newState = {...state}
-            newState[action.hostId]=action.hound
+            newState[action.houndId]=action.hound
         }
         case CREATE_HOUND: {
             let newState = {...state};
@@ -144,7 +152,7 @@ export default function houndReducer(state = initialState, action) {
             }
         case DELETE_HOUND:{
             let newState = {...state};
-            delete newState[action.hostId]
+            delete newState[action.houndId]
             return newState
         }
         default:

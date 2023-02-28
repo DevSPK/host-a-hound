@@ -1,0 +1,30 @@
+.add-hound-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* .add-hound-form > div {
+    display: flex;
+    flex-direction: row;
+} */
+
+.add-hound-form > div > * {
+    display: flex;
+    flex-direction: row;
+}
+
+.add-hound-form > div > label {
+    margin: 5px;
+}
+
+.add-hound-form-item {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.add-hound-form-errors {
+    color: red;
+}
