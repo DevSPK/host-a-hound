@@ -62,11 +62,11 @@ if (sessionUser.id === hound.owner_id) {
     return (
         <div className="hounddetails-wrapper">
             <div className="hounddetails-name-item">{hound.name}</div>
-            <div className="hounddetails-city-item">{hound.age}</div>
-            <div className="hounddetails-state-item">{hound.description}</div>
+            <div className="hounddetails-age-item">{hound.age}</div>
+            <div className="hounddetails-description-item">{hound.description}</div>
             <div className="hostdetials-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
-            {houndDetailButtons}
             <div className="hounddetails-id-item">hound ID{hound.id}</div>
+            {houndDetailButtons}
 
         </div>
     )

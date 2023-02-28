@@ -80,13 +80,13 @@ def edit_host(hound_id):
         if current_hound == None:
             return {"message": "Hound could not be found"}, 404
 
-        if current_hound.user_id != int(current_user.get_id()):
+        if current_hound.owner_id != int(current_user.get_id()):
             return {"message": "Forbidden"}, 403
 
-        current_hound.name = (form.data["name"],)
-        current_hound.description = (form.data["description"],)
-        current_hound.age = (form.data["age"],)
-        current_hound.spayed_neutered = (form.data["spayed_neutered"],)
+        current_hound.name = form.data["name"]
+        current_hound.description = form.data["description"]
+        current_hound.age = form.data["age"]
+        current_hound.spayed_neutered = form.data["spayed_neutered"]
         current_hound.img_url = form.data["img_url"]
 
         db.session.commit()
