@@ -35,7 +35,7 @@ const AllHounds = () => {
             {hounds.map((hound)=> (
                 <div key={hound.id} className="allhounds-hound-card-container">
                     <Link to={`/hound/${hound.id}`}>
-                    <div className="allhounds-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
+                    <div className="allhounds-hound-image" style={{ backgroundImage: `url(${hound.img_url}), url(https://picsum.photos/seed/${hound.id}/1024/720.jpg)` }}></div>
                     <div className="allhounds-hound-info">
                         <div className="allhounds-hound-name">{hound.name}</div> 
                     </div>

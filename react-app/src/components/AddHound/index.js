@@ -21,7 +21,7 @@ const AddHound = () => {
 
     useEffect(() => {
         if (!user) {
-            history.push('/')
+            history.push('/hounds')
             return
         }
     }, [user])

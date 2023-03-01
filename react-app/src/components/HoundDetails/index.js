@@ -1,10 +1,10 @@
 //  HoundDetails/index.js
 
-import { useLayoutEffect } from "react";
-import { useEffect, useState, useRef } from "react";
+
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { thunkGetOneHound, thunkUpdateHound, thunkRemoveHound } from "../../store/hound";
+import { thunkRemoveHound, thunkReadAllHounds } from "../../store/hound";
 import "./HoundDetails.css"
 
 
@@ -27,6 +27,11 @@ await dispatch(thunkRemoveHound(houndId));
 
 
 let hounds = useSelector((state) => Object.values(state.hound));
+
+useEffect(() => {
+  dispatch(thunkReadAllHounds());
+}, [dispatch, houndId]);
+
 
 // console.log("this is hound in hounddetails", hounds)
 
@@ -62,7 +67,7 @@ if (sessionUser.id === hound.owner_id) {
 
     return (
         <div className="hounddetails-wrapper">
-            <div className="hounddetials-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
+            <div className="hounddetials-hound-image" style={{ backgroundImage: `url(${hound.img_url}), url(https://picsum.photos/seed/${hound.id}/1024/720.jpg)` }}></div>
             <span className="hound-info-span">
 
             <div className="hounddetails-name-item">{hound.name}</div>

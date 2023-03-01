@@ -13,12 +13,23 @@ function EditHound() {
     const dispatch = useDispatch()
     const history = useHistory()
     let editedHound
-    const sessionUser = useSelector(state => state.session.user)
-    
-    
+    const user = useSelector(state => state.session.user)
     
     useEffect(() => {
-        dispatch(thunkReadAllHounds());
+        if (!user) {
+            history.push('/hounds')
+            return
+        }
+    }, [user, history, dispatch])
+
+    
+
+    
+    useEffect(() => {
+       
+
+            dispatch(thunkReadAllHounds());
+        
     }, [dispatch, houndId]);
     
     const hounds = useSelector((state) => Object.values(state.hound))
@@ -34,9 +45,9 @@ function EditHound() {
 
   const hound = normalizedHounds[houndId];
 
-//   if (hound.owner_id !== sessionUser.id) {
-//     history.push("/403")
-//   }
+  if (hound.owner_id !== user.id) {
+    history.push("/403")
+  }
 
   editedHound = hound
 
