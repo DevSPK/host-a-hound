@@ -39,6 +39,10 @@ const HostDetails = () => {
 //     getDetails()
 //  }, [dispatch, hostId])
 
+useEffect(() => {
+  dispatch(thunkReadAllHosts());
+}, [dispatch, hostId]);
+
 
 async function handleDelete(hostId) {
   await dispatch(thunkRemoveHost(hostId));

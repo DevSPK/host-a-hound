@@ -1,10 +1,10 @@
 //  HoundDetails/index.js
 
-import { useLayoutEffect } from "react";
-import { useEffect, useState, useRef } from "react";
+
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { thunkGetOneHound, thunkUpdateHound, thunkRemoveHound } from "../../store/hound";
+import { thunkRemoveHound, thunkReadAllHounds } from "../../store/hound";
 import "./HoundDetails.css"
 
 
@@ -27,6 +27,11 @@ await dispatch(thunkRemoveHound(houndId));
 
 
 let hounds = useSelector((state) => Object.values(state.hound));
+
+useEffect(() => {
+  dispatch(thunkReadAllHounds());
+}, [dispatch, houndId]);
+
 
 // console.log("this is hound in hounddetails", hounds)
 
