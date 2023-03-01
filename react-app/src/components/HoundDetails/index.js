@@ -67,7 +67,7 @@ if (sessionUser.id === hound.owner_id) {
 
     return (
         <div className="hounddetails-wrapper">
-            <div className="hounddetials-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
+            <div className="hounddetials-hound-image" style={{ backgroundImage: `url(${hound.img_url}), url(https://picsum.photos/seed/${hound.id}/1024/720.jpg)` }}></div>
             <span className="hound-info-span">
 
             <div className="hounddetails-name-item">{hound.name}</div>

@@ -86,7 +86,7 @@ if (sessionUser.id === host.user_id) {
 
     return (
         <div className="hostdetails-wrapper">
-            <div className="hostdetials-host-image" style={{ backgroundImage: `url(${host.img_url})` }}></div>
+            <div className="hostdetials-host-image" style={{ backgroundImage: `url(${host.img_url}), url(https://picsum.photos/seed/${host.id}/1024/720.jpg)` }}></div>
            <span className="host-info-span">
 
             <div className="hostdetails-name-item">{host.name}</div>

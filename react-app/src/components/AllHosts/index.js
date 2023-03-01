@@ -35,7 +35,7 @@ const AllHosts = () => {
             {hosts.map((host)=> (
                 <div key={host.id} className="allhosts-host-card-container">
                     <Link to={`/host/${host.id}`}>
-                    <div className="allhosts-host-image" style={{ backgroundImage: `url(${host.img_url})` }}></div>
+                    <div className="allhosts-host-image" style={{ backgroundImage: `url(${host.img_url}), url(https://picsum.photos/seed/${host.id}/1024/720.jpg)` }}></div>
                     <div className="allhosts-host-info">
                         <div className="allhosts-host-name">{host.name}</div>
                         <div className="allhosts-host-city-state">{host.city}, {host.state}</div>
