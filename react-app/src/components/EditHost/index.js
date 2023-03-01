@@ -23,7 +23,7 @@ function EditHost() {
     
     const hosts = useSelector((state) => Object.values(state.host))
 
-    console.log("this is hosts in edit hosts", hosts)
+    // console.log("this is hosts in edit hosts", hosts)
     //   let gottenHost
 
     //   async function getHost(hostId) {
@@ -186,7 +186,7 @@ function EditHost() {
 //         history.push('/404')
 //     }
 // }
-console.log("these are errors in edit host", errors)
+// console.log("these are errors in edit host", errors)
 
   const handleCancelClick = (e) => {
     e.preventDefault();
@@ -202,7 +202,7 @@ console.log("these are errors in edit host", errors)
     return (
         <div className='edit-host-form-wrapper'>
         <form className='edit-host-form' onSubmit={handleSubmit}>
-            <h1>Edit this Host</h1>
+            <h1>Edit this host</h1>
            
             <div className='edit-host-form-item'>
                 <label>Name </label>

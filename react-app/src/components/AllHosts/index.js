@@ -22,9 +22,9 @@ const AllHosts = () => {
     
     
 
-    console.log("this is user", user)
+    // console.log("this is user", user)
     
-    console.log("this is hosts in allhosts", hosts)
+    // console.log("this is hosts in allhosts", hosts)
 
     // console.log("this is hosts mapped", hosts.map((host) => host))
 

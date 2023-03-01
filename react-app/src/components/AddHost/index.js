@@ -81,7 +81,7 @@ const AddHost = () => {
         if (url === null) {
             return false
         }
-        console.log(checkURL)
+        // console.log(checkURL)
 
         if (checkURL) {
             return true
@@ -117,7 +117,7 @@ const AddHost = () => {
        
     }
 
-    console.log("these are errors", errors)
+    // console.log("these are errors", errors)
     return (
         <div className="add-host-form-wrapper">
             <form onSubmit={handleSubmit} className='add-host-form'>

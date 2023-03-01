@@ -42,10 +42,10 @@ export const thunkReadAllHosts = () => async (dispatch) => {
     if (response.ok) {
         const hosts = await response.json();
 
-        console.log(
-        	"this is hosts.hosts from thunkReadAllHosts",
-        	hosts.hosts
-        );
+        // console.log(
+        // 	"this is hosts.hosts from thunkReadAllHosts",
+        // 	hosts.hosts
+        // );
         dispatch(actionReadAllHosts(hosts.hosts));
         return
     } else if (response.status === 404) {
@@ -103,7 +103,7 @@ export const thunkAddHost = (host) => async (dispatch) => {
 export const thunkUpdateHost = (host) => async (dispatch) => {
     const { id, name, about, price_per_night, address, city, state, country, img_url, lat, lng } = host;
 
-    console.log("this is host in thunk update host", host);
+    // console.log("this is host in thunk update host", host);
     const response = await fetch(`/api/host/${id}`, {
         method: "PUT",
         headers: {
@@ -113,10 +113,10 @@ export const thunkUpdateHost = (host) => async (dispatch) => {
            name, about, price_per_night, address, city, state, country, img_url, lat, lng
         })
     });
-    console.log("this is response in thunkUpdateHost", response)
+    // console.log("this is response in thunkUpdateHost", response)
     if (response.ok) {
         const data = await response.json();
-        console.log("this is data in thunkUpdateHost", data)
+        // console.log("this is data in thunkUpdateHost", data)
         dispatch(actionUpdateHost(data));
         return data;
     }
@@ -136,7 +136,7 @@ export default function hostReducer(state = initialState, action) {
     switch (action.type) {
         case READ_ALL_HOSTS: {
 
-            console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
+            // console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
             
             const newState = {}
             action.hosts.forEach((host) => {
@@ -148,6 +148,7 @@ export default function hostReducer(state = initialState, action) {
 
             let newState = {...state}
             newState[action.hostId]=action.host
+            return newState
         }
         case CREATE_HOST: {
             let newState = {...state};
@@ -155,7 +156,7 @@ export default function hostReducer(state = initialState, action) {
             return newState
         }
         case UPDATE_HOST:{
-            console.log("this is action.host in UPDATE_HOST", action.host)
+            // console.log("this is action.host in UPDATE_HOST", action.host)
             let newState = {...state};
             newState[action.host.id] = action.host
             return newState

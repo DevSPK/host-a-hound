@@ -35,7 +35,7 @@ export const thunkReadAllHounds = () => async (dispatch) => {
     });
     if (response.ok) {
         const hounds = await response.json();
-         console.log("this is hounds.hounds from thunkReadALLHounds", hounds.hounds)
+        //  console.log("this is hounds.hounds from thunkReadALLHounds", hounds.hounds)
 
 
         dispatch(actionReadAllHounds(hounds.hounds));
@@ -60,7 +60,7 @@ export const thunkAddHound = (hound) => async (dispatch) => {
         })
     });
 
-    console.log("this is hound response", houndResponse)
+    // console.log("this is hound response", houndResponse)
 
     if (houndResponse.ok) {
         const data = await houndResponse.json();
@@ -94,7 +94,7 @@ export const thunkUpdateHound = (hound) => async (dispatch) => {
     const {id, name, description, age, spayed_neutered, img_url} = hound;
 
 
-    console.log("this is hound in thunk update hound", hound);
+    // console.log("this is hound in thunk update hound", hound);
     const response = await fetch(`/api/hound/${id}`, {
         method: "PUT",
         headers: {
@@ -128,7 +128,7 @@ export default function houndReducer(state = initialState, action) {
     switch (action.type) {
         case READ_ALL_HOUNDS: {
 
-            console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
+            // console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
 
             const newState = {...state}
             action.hounds.forEach((hound) => {
@@ -139,6 +139,7 @@ export default function houndReducer(state = initialState, action) {
         case READ_HOUND: {
             let newState = {...state}
             newState[action.houndId]=action.hound
+            return newState
         }
         case CREATE_HOUND: {
             let newState = {...state};

@@ -28,13 +28,13 @@ await dispatch(thunkRemoveHound(houndId));
 
 let hounds = useSelector((state) => Object.values(state.hound));
 
-console.log("this is hound in hounddetails", hounds)
+// console.log("this is hound in hounddetails", hounds)
 
 let normalizedHounds = {};
 
 hounds.forEach((hound) => (normalizedHounds[hound.id] = hound));
 
-console.log("this is hounds after normalized", normalizedHounds)
+// console.log("this is hounds after normalized", normalizedHounds)
 
 const hound = normalizedHounds[houndId]
 
@@ -42,7 +42,7 @@ let houndDetailButtons = null
 
 if (!hound) return null
 
-console.log("this is houndId in hounddetails", houndId)
+// console.log("this is houndId in hounddetails", houndId)
 
 if (!sessionUser) {houndDetailButtons = null} else 
 

@@ -50,13 +50,13 @@ async function handleDelete(hostId) {
 
 let hosts = useSelector((state) => Object.values(state.host));
 
-console.log("this is host in hostdetails", hosts)
+// console.log("this is host in hostdetails", hosts)
 
 let normalizedHosts = {};
 
 hosts.forEach((host) => (normalizedHosts[host.id] = host));
 
-console.log("this is hosts after normalized", normalizedHosts)
+// console.log("this is hosts after normalized", normalizedHosts)
 
 const host = normalizedHosts[hostId]
 

@@ -22,11 +22,11 @@ const AllHounds = () => {
     
     
 
-    console.log("this is user", user)
+    // console.log("this is user", user)
     
-    console.log("this is hounds in allhounds", hounds)
+    // console.log("this is hounds in allhounds", hounds)
 
-    console.log("this is hounds mapped", hounds.map((hound) => hound))
+    // console.log("this is hounds mapped", hounds.map((hound) => hound))
 
     
     return (
