@@ -1,0 +1,19 @@
+.login-errors {
+    color: red;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form > div > * {
+    display: flex;
+    flex-direction: row;
+}
+
+.login-form > div > label {
+    margin: 5px;
+    
+}

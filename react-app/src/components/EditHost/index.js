@@ -70,26 +70,37 @@ function EditHost() {
   }, [dispatch, hostId, editedHost]);
 
   useEffect(() => {
-    const errorsArr = [];
+    let errorsArr = [];
 
     function isImgUrl(url) {
         return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
       }
     
 
-      let parsedPrice = parseFloat(price_per_night)
+      let parsedPrice = parseFloat(price_per_night).toFixed(2)
         
 
-    if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
-    if (name && name.length > 75) errorsArr.push("Host name must be less than 75 characters")
-    if (address && address.length > 150) errorsArr.push("Host address must be less than 150 characters")
-    if (city && city.length > 75) errorsArr.push("Host city must be less than 75 characters")
-    if (state && state.length > 25) errorsArr.push("Host state must be less than 25 characters")
-    if (country && country.length > 50) errorsArr.push("Host country must be less than 50 characters")
-    if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
-    if (about && about.length > 2000) errorsArr.push("Host about must be less than 2000 characters")
-    if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
+    // if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
+    // if (name && name.length > 75) errorsArr.push("Host name must be less than 75 characters")
+    // if (address && address.length > 150) errorsArr.push("Host address must be less than 150 characters")
+    // if (city && city.length > 75) errorsArr.push("Host city must be less than 75 characters")
+    // if (state && state.length > 25) errorsArr.push("Host state must be less than 25 characters")
+    // if (country && country.length > 50) errorsArr.push("Host country must be less than 50 characters")
+    // if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
+    // if (about && about.length > 2000) errorsArr.push("Host about must be less than 2000 characters")
+    // if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
     
+
+    if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
+    if (name && (name.length < 5 || name.length > 75)) errorsArr.push("Host name must be between 5 and 75 characters")
+    if (address && (address.length < 10 || address.length) > 150) errorsArr.push("Host address must be between 10 and 150 characters")
+    if (city && (city.length < 5 ||  city.length > 75)) errorsArr.push("Host city must be between 5 and 75 characters")
+    if (state && (state.length < 2 || state.length > 25)) errorsArr.push("Host state must be between 2 and 25 characters")
+    if (country && (country.length < 2 || country.length > 50)) errorsArr.push("Host country must be between 2 and 50 characters")
+    if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")
+    if (about && (about.length < 10 || about.length > 2000)) errorsArr.push("About must be at least 10 characters and less than 2000 characters")
+    if (price_per_night && price_per_night < 0) errorsArr.push('Price must be greater than zero')
+        
     setErrors(errorsArr);
   }, [name, about, price_per_night, address, city, state, country, img_url]);
 
@@ -148,25 +159,34 @@ function EditHost() {
         id: hostId, name, about, price_per_night, address, city, state, country, img_url, lat, lng
     };
 
-   
-
-    // console.log({ newInfo });
-
-    setErrors([]);
-
-    try {
-        const data = await dispatch(thunkUpdateHost(newInfo))
+    if (errors.length === 0) {
         
-        if (data.errors) {
-            await setErrors(data.errors);
-        } else {
-            history.push(`/host/${hostId}`)
-        }
-    } catch (res) {
-        history.push('/404')
+        await dispatch(thunkUpdateHost(newInfo))
+
+        await history.push(`/host/${hostId}`)
+        return
+    } else {
+        return setErrors(errors)
     }
 }
 
+    // console.log({ newInfo });
+
+    // setErrors([]);
+
+//     try {
+//         const data = await dispatch(thunkUpdateHost(newInfo))
+        
+//         if (data.errors) {
+//             await setErrors(data.errors);
+//         } else {
+//             history.push(`/host/${hostId}`)
+//         }
+//     } catch (res) {
+//         history.push('/404')
+//     }
+// }
+console.log("these are errors in edit host", errors)
 
   const handleCancelClick = (e) => {
     e.preventDefault();
@@ -180,15 +200,11 @@ function EditHost() {
 
     
     return (
-        <div id='edit-host-form-wrapper'>
-        <form id='edit-host-form' onSubmit={handleSubmit}>
+        <div className='edit-host-form-wrapper'>
+        <form className='edit-host-form' onSubmit={handleSubmit}>
             <h1>Edit this Host</h1>
-            <div className='errors'>
-                {errors.errors && (errors.errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-                )))}
-            </div>
-            <div>
+           
+            <div className='edit-host-form-item'>
                 <label>Name </label>
                 <input
                     type="text"
@@ -199,7 +215,7 @@ function EditHost() {
                     maxLength={75}
                 />
             </div>
-            <div>
+            <div className='edit-host-form-item'>
                     <label>
                         Address
                     </label>
@@ -212,7 +228,7 @@ function EditHost() {
                         maxLength={150}
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         City
                     </label>
@@ -225,7 +241,7 @@ function EditHost() {
                         maxLength={75}
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         State
                     </label>
@@ -238,7 +254,7 @@ function EditHost() {
                         maxLength={25}
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         Country
                     </label>
@@ -251,7 +267,7 @@ function EditHost() {
                         maxLength={50}
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         Image URL
                     </label>
@@ -264,20 +280,21 @@ function EditHost() {
                         maxLength={2048}
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         Price per night
                     </label>
                     <input
+                        placeholder='$'
                         type="number"
                         step="0.01"
                         value={price_per_night}
                         onChange={(e) => setPrice_per_night(e.target.value)}
                         required
-                        min={0.01}
+                        
                     />
                 </div>
-                <div>
+                <div className='edit-host-form-item'>
                     <label>
                         About your host
                     </label>
@@ -290,9 +307,15 @@ function EditHost() {
                         maxLength={2000}
                     />
                 </div>
-            <button  type='submit'>Submit</button>
-        </form>
+                
+                 {errors.length > 0 && <ul className="edit-host-form-errors">
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>}
+                {errors.length === 0 && 
+           <button className="edit-host-form-item submit-btn" type='submit'>Edit host</button>
+        }
         <button className='cancel-btn' onClick={handleCancelClick}>Cancel</button>
+        </form>
     </div>
     )
 }

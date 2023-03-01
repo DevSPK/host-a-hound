@@ -32,9 +32,13 @@
 }
 
 .allhosts-host-city-state {
-    font-weight: 100;
+    font-weight: 400;
 }
 
 .allhosts-host-price {
     font-weight: 100;
+}
+
+.allhosts-host-card-container:hover {
+    background-color: rgba(211, 211, 211, 0.2);
 }

@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { thunkGetOneHost, thunkReadAllHosts, thunkRemoveHost } from "../../store/host";
+import "./HostDetails.css"
 
 
 
@@ -64,32 +65,34 @@ let hostDetailButtons = null
 if (!host) return null
 
 
+if (!sessionUser) {hostDetailButtons = null} else
 if (sessionUser.id === host.user_id) {
 
     hostDetailButtons = (
-      <>
+      <div className="host-buttons">
        <Link to={`/host/${host.id}/edit`}>
       <button className="hostdetails-button">Edit host</button>
         </Link>
       <button className="hostdetails-button" onClick={() => handleDelete(host.id)}>Delete host</button>
-      </>
+      </div>
    )
-} else {
-    hostDetailButtons = null
-}
+} 
 
  
 
     return (
         <div className="hostdetails-wrapper">
-            <div className="hostdetails-name-item">{host.name}</div>
-            <div className="hostdetails-city-item">{host.city}</div>
-            <div className="hostdetails-state-item">{host.state}</div>
             <div className="hostdetials-host-image" style={{ backgroundImage: `url(${host.img_url})` }}></div>
-            {hostDetailButtons}
-            <div className="hostdetails-price-item">{host.price_per_night}</div>
+           <span className="host-info-span">
+
+            <div className="hostdetails-name-item">{host.name}</div>
+            <div className="hostdetails-city-state-item">{host.city}, {host.state}</div>
+            
+            <div className="hostdetails-price-item">${host.price_per_night} night</div>
             <div className="hostdetails-about-item">{host.about}</div>
-            <div className="hostdetails-id-item">Host ID{host.id}</div>
+            
+           </span>
+            {hostDetailButtons}
 
         </div>
     )

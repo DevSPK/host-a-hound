@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { thunkGetOneHound, thunkUpdateHound, thunkRemoveHound } from "../../store/hound";
+import "./HoundDetails.css"
 
 
 
@@ -43,29 +44,32 @@ if (!hound) return null
 
 console.log("this is houndId in hounddetails", houndId)
 
+if (!sessionUser) {houndDetailButtons = null} else 
+
 if (sessionUser.id === hound.owner_id) {
 
     houndDetailButtons = (
-      <>
+      <div className="hound-buttons">
        <Link to={`/hound/${hound.id}/edit`}>
       <button className="hounddetails-button">Edit hound</button>
         </Link>
       <button className="hounddetails-button" onClick={() => handleDelete(hound.id)}>Delete hound</button>
-      </>
+      </div>
    )
-} else {
-    houndDetailButtons = null
-}
+} 
 
  
 
     return (
         <div className="hounddetails-wrapper">
+            <div className="hounddetials-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
+            <span className="hound-info-span">
+
             <div className="hounddetails-name-item">{hound.name}</div>
-            <div className="hounddetails-age-item">{hound.age}</div>
+            <div className="hounddetails-age-item">{hound.age} years old</div>
             <div className="hounddetails-description-item">{hound.description}</div>
-            <div className="hostdetials-hound-image" style={{ backgroundImage: `url(${hound.img_url})` }}></div>
-            <div className="hounddetails-id-item">hound ID{hound.id}</div>
+           
+            </span>
             {houndDetailButtons}
 
         </div>
