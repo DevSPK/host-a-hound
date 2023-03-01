@@ -4,11 +4,11 @@
     align-items: center;
 
 }
-
+/* 
 .edit-host-form > div {
     display: flex;
     flex-direction: row;
-} 
+}  */
 
 .edit-host-form > div > * {
     display: flex;
