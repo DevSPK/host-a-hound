@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import "./SignUpForm.css"
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -13,16 +14,35 @@ const SignUpForm = () => {
   // const [lastName, setLastName] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory()
+
+
+useEffect(() => {
+  let errorsArr = [];
+
+  if (!(username && email && password && repeatPassword)) errorsArr.push("All fields must be filled out")
+  if (password !== repeatPassword) errorsArr.push("Passwords must match")
+  
+  
+  setErrors(errorsArr);
+
+}, [username, email, password, repeatPassword]);
+
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
-        setErrors(data)
-      }
-    }
-  };
+
+    if (errors.length === 0) {
+        
+      await dispatch(signUp(username, email, password))
+
+      await history.push(`/`)
+      return
+  } else {
+      return setErrors(errors)
+  }
+}
+   
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -53,12 +73,8 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
+    <form onSubmit={onSignUp} className="signup-form">
+      <h1>Sign up</h1>
       <div>
         <label>User Name</label>
         <input
@@ -71,7 +87,7 @@ const SignUpForm = () => {
       <div>
         <label>Email</label>
         <input
-          type='text'
+          type='email'
           name='email'
           onChange={updateEmail}
           value={email}
@@ -114,7 +130,15 @@ const SignUpForm = () => {
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <div>
+        {errors.map((error, ind) => (
+          <div className="signup-errors" key={ind}>{error}</div>
+        ))}
+      </div>
+      {
+
+      errors.length === 0 && <button type='submit'>Sign up</button>
+      } 
     </form>
   );
 };

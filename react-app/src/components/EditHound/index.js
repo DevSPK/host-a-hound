@@ -119,7 +119,7 @@ function EditHound() {
     
     return (
         <div id='edit-hound-form-wrapper'>
-        <form id='edit-hound-form' onSubmit={handleSubmit}>
+        <form className='edit-hound-form' onSubmit={handleSubmit}>
             <h1>Edit this hound</h1>
            
             <div>
@@ -174,10 +174,10 @@ function EditHound() {
                         maxLength={2000}
                     />
                 </div>
-                <div className='errors'>
-                {errors.errors && (errors.errors.map((error, ind) => (
-                <div key={ind}>{error}</div>
-                )))}
+                <div>
+                {errors.length > 0 && <ul className="edit-hound-form-errors">
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>}
             </div>
            {
             errors.length === 0 &&

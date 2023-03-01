@@ -50,18 +50,18 @@ const ProfileMenu = () => {
     if (sessionUser) {
         profileDetails = (
             <div className='navbar-profile-sessionuser-wrapper'>
-
+{/* 
                 <NavLink to='/add-host' activeClassName='active' className='profile-add-link'>
                     Add host
                         </NavLink>
                 <NavLink to='/add-hound' activeClassName='active' className='profile-add-link'>
                     Add hound
-                        </NavLink>
+                        </NavLink> */}
 
             <div className='profile-wrapper'>
-                <button className="profile-button" onClick={openProfileMenu}>
+                <div className="profile-button" onClick={openProfileMenu}>
                     <span><i className="fas fa-user-circle" /> <i className="fa-solid fa-caret-down" /> </span>
-                </button>
+                </div>
                 <div className='profile-menu-wrapper'>
                     <div className={showProfileMenu}>
                         <div className='profile-menu-header'>
@@ -76,13 +76,21 @@ const ProfileMenu = () => {
                             </span>
                         </div>
                         <div className="profile-menu-navlinks">
+                        <NavLink to='/add-host' activeClassName='active' className='profile-menu-item'>
+                            <i className="fa-solid fa-plus" />{ }
+                     Add host
+                        </NavLink>
+                <NavLink to='/add-hound' activeClassName='active' className='profile-menu-item'>
+                            <i className="fa-solid fa-plus" />
+                            { }Add hound
+                        </NavLink>
 
-                        <NavLink to={`/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
+                        {/* <NavLink to={`/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
                             <i className="fa-solid fa-list" /> Your hosts
                         </NavLink>
                         <NavLink to={`/${sessionUser.id}/hounds`} activeClassName='active' className='profile-menu-item'>
                             <i className="fa-solid fa-list" /> Your hounds
-                        </NavLink>
+                        </NavLink> */}
                         {/* <NavLink to='/your-bookings' activeClassName='active' className='profile-menu-item'>
                             <i className="fa-regular fa-clipboard" /> <span> </span> Your bookings
                         </NavLink>
@@ -100,9 +108,9 @@ const ProfileMenu = () => {
     } else {
         profileDetails = (
             <>
-                <button onClick={loginDemoUser} className='profile-demo-user-button'>
+                <div onClick={loginDemoUser} className='profile-demo-user-button'>
                     Demo user
-                </button>
+                </div>
                 <NavLink to='/log-in' activeClassName='active' className='profile-log-in-link'>
                     Log in
                 </NavLink>

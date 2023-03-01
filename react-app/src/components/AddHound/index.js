@@ -37,7 +37,7 @@ console.log("this is add hounds user", user)
         
         
         if (!(name && description && age && img_url)) errorsArr.push("All fields must be filled out")
-        if (name && (name.length < 5 || name.length > 75)) errorsArr.push("Hound name must be between 5 and 75 characters")
+        if (name && (name.length < 2 || name.length > 75)) errorsArr.push("Hound name must be between 2 and 75 characters")
         if (age && (age.length < 1 || age.length) > 3) errorsArr.push("Hound age must be between 1 and 2 characters")
         // if (spayedNeutered) errorsArr.push("Must provide spayed/neutered status")
         if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")

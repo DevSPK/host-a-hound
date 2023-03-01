@@ -14,7 +14,7 @@ const AddHost = () => {
     const [state, setState] = useState("");
     const [country, setCountry] = useState("")
     const [img_url, setImg_url] = useState("");
-    const [price_per_night, setPrice_per_night] = useState(0);
+    const [price_per_night, setPrice_per_night] = useState(null);
     const [lat, setLat] = useState(38.889248);
     const [lng, setLng] = useState(-77.050636);
     const [errors, setErrors] = useState([])
@@ -30,10 +30,11 @@ const AddHost = () => {
         }
     }, [user])
 
+    let parsedPrice = parseFloat(price_per_night).toFixed(2)
+
     useEffect(() => {
         let errorsArr = []
 
-        let parsedPrice = parseFloat(price_per_night)
         
         // async function isImgUrl(url) {
         //     const res = await fetch(url, { method: 'HEAD' });
@@ -208,7 +209,7 @@ const AddHost = () => {
                         Price per night
                     </label>
                     <input
-                        // placeholder="Price per night"
+                        placeholder="$"
                         type="number"
                         step="0.01"
                         value={price_per_night}

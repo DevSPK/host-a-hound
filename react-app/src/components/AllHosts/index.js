@@ -39,7 +39,7 @@ const AllHosts = () => {
                     <div className="allhosts-host-info">
                         <div className="allhosts-host-name">{host.name}</div>
                         <div className="allhosts-host-city-state">{host.city}, {host.state}</div>
-                        <div className="allhosts-host-price">${host.price_per_night} night</div>
+                        <div className="allhosts-host-price">${host.price_per_night.toFixed(2)} night</div>
                     </div>
                     </Link>
                 </div>  

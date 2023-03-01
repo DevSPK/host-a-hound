@@ -30,3 +30,9 @@
 .allhounds-hound-name {
     font-weight: 500;
 }
+
+
+
+.allhounds-hound-card-container:hover {
+    background-color: rgba(211, 211, 211, 0.2);
+}

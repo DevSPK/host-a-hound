@@ -72,10 +72,6 @@
     box-sizing: border-box;
 }
 
-.navbar-profile.sessionuser-wrapper {
-    display: flex;
-}
-
 .profile-hidden {
     display: none;
 }
@@ -110,7 +106,7 @@
 .profile-menu-wrapper {
     z-index: 1;
     position: fixed;
-    margin-top: 2%;
+    margin-top: 1em;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 0px 5px lightgray;
@@ -164,10 +160,10 @@
     display: flex;
    width: 100%;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-wrap: wrap;
-    align-content: flex-start;
+    align-content: flex-end;
 }
 
 .profile-menu-userinfo {
@@ -178,4 +174,25 @@
 .profile-menu-navlinks {
     display: flex;
     flex-direction: column;
+}
+
+.fa-plus {
+    margin-right: .75em;
+}
+
+.navbar-hosts.active {
+    font-weight: 500;
+    font-size: large;
+}
+
+.navbar-hounds.active {
+    font-weight: 500;
+    font-size: large;
+}
+
+.navbar-hosts:hover {
+    background-color: rgba(211, 211, 211, 0.2);
+}
+.navbar-hounds:hover {
+    background-color: rgba(211, 211, 211, 0.2);
 }

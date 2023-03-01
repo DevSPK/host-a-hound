@@ -1,0 +1,30 @@
+.edit-host-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.edit-host-form > div {
+    display: flex;
+    flex-direction: row;
+} 
+
+.edit-host-form > div > * {
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-host-form > div > label {
+    margin: 5px;
+}
+
+.edit-host-form-item {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.edit-host-form-errors {
+    color: red;
+}
