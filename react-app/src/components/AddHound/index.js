@@ -26,7 +26,7 @@ const AddHound = () => {
         }
     }, [user])
 
-console.log("this is add hounds user", user)
+// console.log("this is add hounds user", user)
 
 
     useEffect(() => {
@@ -56,7 +56,7 @@ console.log("this is add hounds user", user)
         if (url === null) {
             return false
         }
-        console.log(checkURL)
+        // console.log(checkURL)
 
         if (checkURL) {
             return true
@@ -73,7 +73,7 @@ console.log("this is add hounds user", user)
                 name, description, age, spayed_neutered:spayedNeutered, img_url
             }
 
-            console.log("this is houndInfo", houndInfo)
+            // console.log("this is houndInfo", houndInfo)
     
             setSubmitted(true)
             await dispatch(thunkAddHound(houndInfo))
@@ -94,7 +94,7 @@ console.log("this is add hounds user", user)
        
     }
 
-    console.log("these are errors", errors)
+    // console.log("these are errors", errors)
     return (
         <div className="add-hound-form-wrapper">
             <form onSubmit={handleSubmit} className='add-hound-form'>

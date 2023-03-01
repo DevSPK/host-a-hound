@@ -23,7 +23,7 @@ function EditHound() {
     
     const hounds = useSelector((state) => Object.values(state.hound))
 
-    console.log("this is hounds in edit hounds", hounds)
+    // console.log("this is hounds in edit hounds", hounds)
    
 
   
@@ -87,7 +87,7 @@ function EditHound() {
 
    
 
-    console.log({ newInfo });
+    // console.log({ newInfo });
 
     setErrors([]);
 
@@ -100,7 +100,7 @@ function EditHound() {
             history.push(`/hound/${houndId}`)
         }
     } catch (res) {
-        console.log("this is res", res)
+        // console.log("this is res", res)
         history.push('/404')
     }
 }
