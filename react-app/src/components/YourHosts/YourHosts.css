@@ -1,0 +1,44 @@
+.allhosts-host-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    box-shadow: 0px 0px 3px black;
+}
+
+.allhosts-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+.allhosts-host-card-container {
+    width: 310.75px;
+  display: flex;
+  flex-direction: column;
+  margin: 9px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.allhosts-host-name {
+    font-weight: 500;
+}
+
+.allhosts-host-city-state {
+    font-weight: 400;
+}
+
+.allhosts-host-price {
+    font-weight: 100;
+}
+
+.allhosts-host-card-container:hover {
+    background-color: rgba(211, 211, 211, 0.2);
+}

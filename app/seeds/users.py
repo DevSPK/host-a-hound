@@ -50,7 +50,7 @@ def seed_users():
             "lat": 38.889248,
             "lng": -77.050636,
             "price_per_night": 99.99,
-            "img_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-735542330357205664/original/8b8ebac7-b4b7-43d1-a995-cc849c3179e4.jpeg",
+            "img_url": "https://a0.muscache.com/im/pictures/miso/Hosting-47771464/original/e8f6758f-1348-43f6-832a-066a90523068.jpeg",
         },
         {
             "user_id": 2,
@@ -102,7 +102,7 @@ def seed_users():
             "lat": 38.889248,
             "lng": -77.050636,
             "price_per_night": 50.00,
-            "img_url": "https://a0.muscache.com/im/pictures/prohost-api/Hosting-743341669591736223/original/a41885e2-99c5-42f8-b2b3-94d12434e8fd.jpeg",
+            "img_url": "https://a0.muscache.com/im/pictures/2d502704-5db1-47c0-bfee-3816d04743fb.jpg",
         },
         {
             "user_id": 1,
