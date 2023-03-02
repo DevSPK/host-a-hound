@@ -28,6 +28,18 @@ const YourHosts = () => {
 
     // console.log("this is hosts mapped", hosts.map((host) => host))
 
+    let normalizedHosts = {};
+
+allhosts.forEach((host) => (normalizedHosts[host.id] = host));
+
+console.log("this is hosts after normalized", normalizedHosts)
+
+// const host = normalizedHosts[hostId]
+
+// let hostDetailButtons = null
+
+// if (!host) return null
+
     
     return (
         <div className="yourhosts-wrapper">
