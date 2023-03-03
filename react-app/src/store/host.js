@@ -69,7 +69,7 @@ export const thunkReadYourHosts = (userId) => async (dispatch) => {
         const hosts = await response.json();
 
         // console.log(
-        // 	"this is hosts.hosts from thunkReadAllHosts",
+        // 	"this is hosts.hosts from thunkReadYourHosts",
         // 	hosts.hosts
         // );
         dispatch(actionReadYourHosts(hosts.hosts));
@@ -172,7 +172,7 @@ export default function hostReducer(state = initialState, action) {
         }
         case READ_YOUR_HOSTS: {
 
-            // console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
+            // console.log("this is action.hosts in READ_YOUR_HOSTS", action.hosts)
             
             const newState = {}
             action.hosts.forEach((host) => {

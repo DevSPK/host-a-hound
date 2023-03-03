@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User
-from ..models import db, Host
+from ..models import db, Host, Hound
 from sqlalchemy.orm import joinedload
 from sqlalchemy import desc
 from .auth_routes import validation_errors_to_error_messages
@@ -40,3 +40,16 @@ def get_hosts_by_user_id(current_id):
 
     hosts = Host.query.filter_by(user_id=current_id).all()
     return {"hosts": [host.to_dict() for host in hosts]}
+
+
+@user_routes.route("<int:current_id>/hounds")
+@login_required
+def get_hounds_by_owner_id(current_id):
+    """
+    Query hounds by owner id and returns all of the owner's hounds in a list of host dictionaries
+    """
+
+    current_id = current_user.get_id()
+
+    hounds = Hound.query.filter_by(owner_id=current_id).all()
+    return {"hounds": [hound.to_dict() for hound in hounds]}

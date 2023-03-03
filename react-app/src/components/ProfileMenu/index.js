@@ -76,30 +76,31 @@ const ProfileMenu = () => {
                             </span>
                         </div>
                         <div className="profile-menu-navlinks">
-                        <NavLink to='/add-host' activeClassName='active' className='profile-menu-item'>
-                            <i className="fa-solid fa-plus" />{ }
+                        <NavLink to='/add-host' activeClassName='active' className='profile-menu-item line'>
+                            <i className="fa-solid fa-plus" />
                      Add host
                         </NavLink>
                 <NavLink to='/add-hound' activeClassName='active' className='profile-menu-item'>
                             <i className="fa-solid fa-plus" />
-                            { }Add hound
+                            Add hound
                         </NavLink>
-                        <NavLink to={`/users/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
-                            <i className="fa-solid fa-list" />{ }Your hosts
+                        <NavLink to={`/users/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item line'>
+                            <i className="fa fa-solid fa-list fa-fw" />&nbsp;
+                            Your hosts
+                        </NavLink>
+                        <NavLink to={`/users/${sessionUser.id}/hounds`} activeClassName='active' className='profile-menu-item'>
+                            <i className="fa fa-solid fa-list fa-fw" />&nbsp;
+                            Your hounds
                         </NavLink>
 
-                        {/* <NavLink to={`/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
-                            <i className="fa-solid fa-list" /> Your hosts
-                        </NavLink>
-                        <NavLink to={`/${sessionUser.id}/hounds`} activeClassName='active' className='profile-menu-item'>
-                            <i className="fa-solid fa-list" /> Your hounds
-                        </NavLink> */}
+                        
                         {/* <NavLink to='/your-bookings' activeClassName='active' className='profile-menu-item'>
                             <i className="fa-regular fa-clipboard" /> <span> </span> Your bookings
                         </NavLink>
                         <NavLink to='/your-reviews' activeClassName='active' className='profile-menu-item star'>
                             <i className="fa-regular fa-star" /> Your reviews
                         </NavLink> */}
+                       
                         <LogoutButton />
                         </div>
                     </div>

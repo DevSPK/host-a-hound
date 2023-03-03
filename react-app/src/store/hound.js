@@ -1,6 +1,7 @@
 const CREATE_HOUND = "hound/CREATE_HOUND";
 const READ_HOUND = "hound/READ_HOUND";
 const READ_ALL_HOUNDS = "hound/READ_ALL_HOUNDS";
+const READ_YOUR_HOUNDS = "hound/READ_YOUR_HOUNDS";
 const UPDATE_HOUND = "hound/UPDATE_HOUND";
 const DELETE_HOUND = "hound/DELETE_HOUND";
 
@@ -16,6 +17,10 @@ export const actionReadHound = (houndId) => ({
 
 export const actionReadAllHounds = (hounds) => ({
     type: READ_ALL_HOUNDS,
+    hounds
+});
+export const actionReadYourHounds = (hounds) => ({
+    type: READ_YOUR_HOUNDS,
     hounds
 });
 
@@ -39,6 +44,25 @@ export const thunkReadAllHounds = () => async (dispatch) => {
 
 
         dispatch(actionReadAllHounds(hounds.hounds));
+        return
+    } else if (response.status === 404) {
+        throw Error('404')
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+};
+
+export const thunkReadYourHounds = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/hounds`, {
+        method: "GET"
+    });
+
+    if (response.ok) {
+        const hounds = await response.json();
+        //  console.log("this is hounds.hounds from thunkReadYourHounds", hounds.hounds)
+
+
+        dispatch(actionReadYourHounds(hounds.hounds));
         return
     } else if (response.status === 404) {
         throw Error('404')
@@ -130,7 +154,17 @@ export default function houndReducer(state = initialState, action) {
 
             // console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
 
-            const newState = {...state}
+            const newState = {}
+            action.hounds.forEach((hound) => {
+                newState[hound.id] = hound;
+              });
+              return newState;
+        }
+        case READ_YOUR_HOUNDS: {
+
+            // console.log("this is action.hounds in READ_ALL_HOUNDS", action.hounds)
+
+            const newState = {}
             action.hounds.forEach((hound) => {
                 newState[hound.id] = hound;
               });

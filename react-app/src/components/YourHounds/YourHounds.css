@@ -1,4 +1,4 @@
-.yourhosts-host-image {
+.yourhounds-hound-image {
     width: 100%;
     aspect-ratio: 1/1;
     background-position: center;
@@ -8,7 +8,7 @@
     box-shadow: 0px 0px 3px black;
 }
 
-.yourhosts-wrapper {
+.yourhounds-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -19,27 +19,21 @@
     min-width: 100%;
 }
 
-.yourhosts-host-card-container {
+.yourhounds-hound-card-container {
     width: 310.75px;
-  display: flex;
-  flex-direction: column;
-  margin: 9px;
-  margin-bottom: 20px;
-  cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 9px;
+    margin-bottom: 20px;
+    cursor: pointer;
 }
 
-.yourhosts-host-name {
+.yourhounds-hound-name {
     font-weight: 500;
 }
 
-.yourhosts-host-city-state {
-    font-weight: 400;
-}
 
-.yourhosts-host-price {
-    font-weight: 100;
-}
 
-.yourhosts-host-card-container:hover {
+.yourhounds-hound-card-container:hover {
     background-color: rgba(211, 211, 211, 0.2);
 }

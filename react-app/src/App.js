@@ -17,6 +17,7 @@ import AddHound from './components/AddHound';
 import HoundDetails from './components/HoundDetails';
 import EditHound from './components/EditHound';
 import YourHosts from './components/YourHosts';
+import YourHounds from './components/YourHounds';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +78,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId/hosts' exact={true} >
           <YourHosts />
+        </ProtectedRoute>
+        <ProtectedRoute path='/users/:userId/hounds' exact={true} >
+          <YourHounds />
         </ProtectedRoute>
         <Route path="/hounds" exact={true}>
           <AllHounds />
