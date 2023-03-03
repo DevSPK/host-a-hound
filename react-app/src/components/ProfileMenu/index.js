@@ -84,6 +84,9 @@ const ProfileMenu = () => {
                             <i className="fa-solid fa-plus" />
                             { }Add hound
                         </NavLink>
+                        <NavLink to={`/users/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
+                            <i className="fa-solid fa-list" />{ }Your hosts
+                        </NavLink>
 
                         {/* <NavLink to={`/${sessionUser.id}/hosts`} activeClassName='active' className='profile-menu-item'>
                             <i className="fa-solid fa-list" /> Your hosts

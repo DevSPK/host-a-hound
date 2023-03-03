@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, Link } from "react-router-dom"
-import { thunkReadAllHosts } from "../../store/host"
+import { thunkReadYourHosts } from "../../store/host"
 import "./YourHosts.css"
 
 const YourHosts = () => {
@@ -10,27 +10,29 @@ const YourHosts = () => {
     const history = useHistory()
     // const [isLoaded, setIsLoaded] = useState(false)
     const user = useSelector((state) => state.session.user)
+    console.log("this is user", user)
     
-    const allhosts = useSelector((state) => Object.values(state.host))
-
+    let hosts
     
     useEffect( () => {
-        dispatch(thunkReadAllHosts())
-    }, [dispatch])
+        dispatch(thunkReadYourHosts(user.id))
+        
+    }, [dispatch, user])
     
-    // if (hosts.length === 0) return null
+    hosts = useSelector((state) => Object.values(state.host))
+   
     
-    
+    if (hosts.length === 0) return null
 
-    // console.log("this is user", user)
+    console.log("this is user", user)
     
-    // console.log("this is hosts in yourhosts", hosts)
+    console.log("this is hosts in yourhosts", hosts)
 
-    // console.log("this is hosts mapped", hosts.map((host) => host))
+    console.log("this is hosts mapped", hosts.map((host) => host))
 
     let normalizedHosts = {};
 
-allhosts.forEach((host) => (normalizedHosts[host.id] = host));
+hosts.forEach((host) => (normalizedHosts[host.id] = host));
 
 console.log("this is hosts after normalized", normalizedHosts)
 

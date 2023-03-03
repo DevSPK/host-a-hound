@@ -33,7 +33,7 @@ const NavBar = () => {
       <div className='external-links'>
 
       <Link to={{ pathname: 'https://www.linkedin.com/in/devspk' }} target="_blank"><i className="fa-brands fa-linkedin fa-2x"></i></Link>
-      <Link to={{ pathname: 'https://github.com/DevSPK' }} target="_blank"><i class="fa-brands fa-square-github fa-2x"></i></Link>
+      <Link to={{ pathname: 'https://github.com/DevSPK' }} target="_blank"><i className="fa-brands fa-square-github fa-2x"></i></Link>
       <div className="navbar-links">
 
       <>

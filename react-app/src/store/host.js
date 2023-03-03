@@ -3,6 +3,7 @@ const READ_HOST = "host/READ_HOST";
 const READ_ALL_HOSTS = "host/READ_ALL_HOSTS";
 const UPDATE_HOST = "host/UPDATE_HOST";
 const DELETE_HOST = "host/DELETE_HOST";
+const READ_YOUR_HOSTS = "host/READ_YOUR_HOSTS";
 
 
 export const actionCreateHost = (host) => ({
@@ -32,6 +33,10 @@ export const actionDeleteHost = (hostId) => ({
     hostId
 });
 
+export const actionReadYourHosts = (hosts) => ({
+    type: READ_YOUR_HOSTS,
+    hosts
+});
 
 
 export const thunkReadAllHosts = () => async (dispatch) => {
@@ -47,6 +52,27 @@ export const thunkReadAllHosts = () => async (dispatch) => {
         // 	hosts.hosts
         // );
         dispatch(actionReadAllHosts(hosts.hosts));
+        return
+    } else if (response.status === 404) {
+        throw Error('404')
+    } else {
+        return ['An error occurred. Please try again.']
+    }
+}
+
+export const thunkReadYourHosts = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}/hosts`, {
+        method: "GET"
+    });
+   
+    if (response.ok) {
+        const hosts = await response.json();
+
+        // console.log(
+        // 	"this is hosts.hosts from thunkReadAllHosts",
+        // 	hosts.hosts
+        // );
+        dispatch(actionReadYourHosts(hosts.hosts));
         return
     } else if (response.status === 404) {
         throw Error('404')
@@ -135,6 +161,16 @@ let initialState = {}
 export default function hostReducer(state = initialState, action) {
     switch (action.type) {
         case READ_ALL_HOSTS: {
+
+            // console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
+            
+            const newState = {}
+            action.hosts.forEach((host) => {
+                newState[host.id] = host;
+              });
+              return newState;
+        }
+        case READ_YOUR_HOSTS: {
 
             // console.log("this is action.hosts in READ_ALL_HOSTS", action.hosts)
             
