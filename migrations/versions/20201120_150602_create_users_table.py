@@ -61,6 +61,24 @@ def upgrade():
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    op.create_table(
+        "bookings",
+        sa.Column("id", sa.Integer(), nullable=False),
+        sa.Column("host_id", sa.Integer(), nullable=True),
+        sa.Column("hound_id", sa.Integer(), nullable=True),
+        sa.Column("start_date", sa.Date(), nullable=False),
+        sa.Column("end_date", sa.Date(), nullable=False),
+        sa.Column("cost", sa.Float(), nullable=False),
+        sa.ForeignKeyConstraint(
+            ["host_id"],
+            ["hosts.id"],
+        ),
+        sa.ForeignKeyConstraint(
+            ["hound_id"],
+            ["hounds.id"],
+        ),
+        sa.PrimaryKeyConstraint("id"),
+    )
 
 
     if environment == "production":
@@ -73,4 +91,5 @@ def downgrade():
     op.drop_table('users')
     op.drop_table('hosts')
     op.drop_table('hounds')
+    op.drop_table('bookings')
     # ### end Alembic commands ###

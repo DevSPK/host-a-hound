@@ -1,4 +1,5 @@
-from app.models import db, User, environment, SCHEMA, Host, Hound
+from app.models import db, User, environment, SCHEMA, Host, Hound, Booking
+from datetime import date
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -260,6 +261,63 @@ def seed_users():
         db.session.add(new_hound)
         db.session.commit()
 
+    seed_bookings = [
+        {
+            "host_id": 1,
+            "hound_id": 1,
+            "start_date": date(2023, 5, 15),
+            "end_date": date(2023, 5, 22),
+            "cost": 528.08,
+        },
+        {
+            "host_id": 1,
+            "hound_id": 2,
+            "start_date": date(2023, 4, 15),
+            "end_date": date(2023, 4, 22),
+            "cost": 528.08,
+        },
+        {
+            "host_id": 1,
+            "hound_id": 3,
+            "start_date": date(2023, 6, 15),
+            "end_date": date(2023, 6, 22),
+            "cost": 528.08,
+        },
+        {
+            "host_id": 1,
+            "hound_id": 4,
+            "start_date": date(2023, 7, 15),
+            "end_date": date(2023, 7, 22),
+            "cost": 528.08,
+        },
+        {
+            "host_id": 1,
+            "hound_id": 5,
+            "start_date": date(2023, 8, 15),
+            "end_date": date(2023, 8, 22),
+            "cost": 528.08,
+        },
+        {
+            "host_id": 1,
+            "hound_id": 2,
+            "start_date": date(2023, 8, 15),
+            "end_date": date(2023, 8, 22),
+            "cost": 528.08,
+        },
+    ]
+
+    for booking in seed_bookings:
+        new_booking = Booking(
+            host_id=booking["host_id"],
+            hound_id=booking["hound_id"],
+            start_date=booking["start_date"],
+            end_date=booking["end_date"],
+            cost=booking["cost"],
+        )
+
+        db.session.add(new_booking)
+        db.session.commit()
+
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE
@@ -274,5 +332,7 @@ def undo_users():
         db.session.execute("DELETE FROM users")
         db.session.execute("DELETE FROM hosts")
         db.session.execute("DELETE FROM hounds")
+        db.session.execute("DELETE FROM bookings")
+        
 
     db.session.commit()
