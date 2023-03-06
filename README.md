@@ -1,9 +1,5 @@
 <!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/DevSPK/host-a-hound">
-    <img src="./frontend/public/favicon.ico" alt="Logo" width="80" height="80">
-  </a>
+
 
 <h3 align="center">Host-a-hound</h3>
 
