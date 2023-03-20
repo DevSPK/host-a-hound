@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import session from './session'
 import host from './host';
 import hound from './hound';
+import booking from './booking';
 
 
 const rootReducer = combineReducers({
   session,
   host,
-  hound
+  hound, 
+  booking
 });
 
 

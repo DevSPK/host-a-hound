@@ -38,6 +38,33 @@ def get_booking_by_id(id):
 
     return booking.to_dict()
 
+@booking_routes.get("/<int:host_id>")
+def get_booking_by_host_id(host_id):
+    """
+    Query bookings by host id and returns the bookings
+    """
+    
+    booking = Booking.query.get(host_id)
+
+    if not booking:
+        return {"message": "Booking could not be found"}, 404
+
+    return booking.to_dict()
+
+@booking_routes.get("/<int:hound_id>")
+def get_booking_by_hound_id(hound_id):
+    """
+    Query bookings by hound id and returns the bookings
+    """
+    
+    booking = Booking.query.get(hound_id)
+
+    if not booking:
+        return {"message": "Booking could not be found"}, 404
+
+    return booking.to_dict()
+
+
 
 @booking_routes.post("/")
 @login_required
