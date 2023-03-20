@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.host_routes import host_routes
 from .api.hound_routes import hound_routes
+from .api.booking_routes import booking_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +33,7 @@ app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(host_routes, url_prefix="/api/host")
 app.register_blueprint(hound_routes, url_prefix="/api/hound")
+app.register_blueprint(booking_routes, url_prefix="/api/booking")
 db.init_app(app)
 Migrate(app, db)
 
