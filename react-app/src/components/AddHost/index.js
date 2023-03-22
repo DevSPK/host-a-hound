@@ -14,6 +14,7 @@ const AddHost = () => {
     const [state, setState] = useState("");
     const [country, setCountry] = useState("")
     const [img_url, setImg_url] = useState("");
+    const [image, setImage] = useState(null);
     const [price_per_night, setPrice_per_night] = useState(null);
     const [lat, setLat] = useState(38.889248);
     const [lng, setLng] = useState(-77.050636);
@@ -21,6 +22,7 @@ const AddHost = () => {
     const [submitted, setSubmitted] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory()
+    const [imageLoading, setImageLoading] = useState(false);
     const user = useSelector((state) => state.session.user)
 
     useEffect(() => {
@@ -90,22 +92,34 @@ const AddHost = () => {
         else {return false}
       }
 
+
+
+      const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        setImageLoading(true);
+
         if (errors.length === 0) {
             let hostInfo = {
-                name, about, price_per_night, address, city, state, country, img_url, lat, lng
+                name, about, price_per_night, address, city, state, country, img_url:image, lat, lng
             }
-    
+            
             setSubmitted(true)
+            
             await dispatch(thunkAddHost(hostInfo))
        
         
-
+            setImageLoading(false);
             await history.push(`/`)
             return
         } else {
+            setImageLoading(false);
             return setErrors(errors)
         }
 
@@ -195,14 +209,15 @@ const AddHost = () => {
                         Image URL
                     </label>
                     <input
-                        type="text"
-                        value={img_url}
-                        onChange={(e) => setImg_url(e.target.value)}
+                        type="file"
+                        accept="image/*"
+                        onChange={updateImage}
                         required
                         minLength={1}
                         maxLength={2048}
                         // placeholder="Image URL"
                     />
+                    {(imageLoading)&& <p>Loading...</p>}
                 </div>
                 <div className="add-host-form-item">
                     <label>
