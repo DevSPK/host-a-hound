@@ -14,8 +14,8 @@ const AddHost = () => {
     const [state, setState] = useState("");
     const [country, setCountry] = useState("")
     const [img_url, setImg_url] = useState("");
-    const [image, setImage] = useState(null);
-    const [price_per_night, setPrice_per_night] = useState(null);
+    const [image, setImage] = useState("");
+    const [price_per_night, setPrice_per_night] = useState("");
     const [lat, setLat] = useState(38.889248);
     const [lng, setLng] = useState(-77.050636);
     const [errors, setErrors] = useState([])
@@ -61,13 +61,13 @@ const AddHost = () => {
 
         
         
-        if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
+        if (!(name && about && price_per_night && address && city && state && country)) errorsArr.push("All fields must be filled out")
         if (name && (name.length < 5 || name.length > 75)) errorsArr.push("Host name must be between 5 and 75 characters")
         if (address && (address.length < 10 || address.length) > 150) errorsArr.push("Host address must be between 10 and 150 characters")
         if (city && (city.length < 5 ||  city.length > 75)) errorsArr.push("Host city must be between 5 and 75 characters")
         if (state && (state.length < 2 || state.length > 25)) errorsArr.push("Host state must be between 2 and 25 characters")
         if (country && (country.length < 2 || country.length > 50)) errorsArr.push("Host country must be between 2 and 50 characters")
-        if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")
+        // if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")
         if (about && (about.length < 10 || about.length > 2000)) errorsArr.push("About must be at least 10 characters and less than 2000 characters")
         if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
         
@@ -76,27 +76,28 @@ const AddHost = () => {
         setErrors(errorsArr)
     }, [name, about, price_per_night, address, city, state, country, img_url])
 
-    function isImgUrl(url) {
+    // function isImgUrl(url) {
 
-        let checkURL = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(url)
+    //     let checkURL = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(url)
         
-        if (url === null) {
-            return false
-        }
-        // console.log(checkURL)
+    //     if (url === null) {
+    //         return false
+    //     }
+    //     // console.log(checkURL)
 
-        if (checkURL) {
-            return true
-        }
+    //     if (checkURL) {
+    //         return true
+    //     }
 
-        else {return false}
-      }
+    //     else {return false}
+    //   }
 
 
 
       const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
+        console.log("this is image", image)
     }
 
 
@@ -209,6 +210,7 @@ const AddHost = () => {
                         Image URL
                     </label>
                     <input
+                        
                         type="file"
                         accept="image/*"
                         onChange={updateImage}
