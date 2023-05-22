@@ -9,12 +9,15 @@ const UploadHostPicture = () => {
     
     
     const handleSubmit = async (e) => {
+        console.log("inside UploadHostPicture handlesubmit")
         e.preventDefault();
         const formData = new FormData();
         formData.append("image", image);
         
         // aws uploads can be a bit slow—displaying
         // some sort of loading message is a good idea
+
+        //check for filename issue from aws directions
         setImageLoading(true);
 
         const res = await fetch('/api/images', {
@@ -22,6 +25,7 @@ const UploadHostPicture = () => {
             body: formData,
         });
         if (res.ok) {
+            console.log("this is response from api/images", res)
             await res.json();
             setImageLoading(false);
             history.push("/images");
@@ -40,15 +44,15 @@ const UploadHostPicture = () => {
     }
     
     return (
-        <form onSubmit={handleSubmit}>
+        <>
             <input
+            
               type="file"
               accept="image/*"
               onChange={updateImage}
-            />
-            <button type="submit">Submit</button>
+            /> 
             {(imageLoading)&& <p>Loading...</p>}
-        </form>
+        </>
     )
 }
 

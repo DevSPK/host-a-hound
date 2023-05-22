@@ -47,35 +47,42 @@ def create_host():
     """
     form = CreateUpdateHostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    # print("==============this is request.files", request.files)
 
-    print("first if")
-    print("this is reqsuest.files", request.files)
+    # if request.content_type.startswith("multipart/form-data"):
+    #     print("Form is multipart")
+    # else:
+    #     print("Form is not multipart")
 
-    if "image" not in request.files:
-        return {"errors": "image required"}, 400
+    # for file_name in request.files:
+    #     print(f"Received file: {file_name}")
+    # print("==================this is form", form)
+    # # print("====================this is form image", form["image"])
+    # if "image" not in request.files:
+    #     print("--------------------first if")
+    #     return {"errors": "image required"}, 400
 
-    image = request.files["image"]
+    # image = request.files["image"]
 
-    print("second if")
+    # # if not allowed_file(image.filename):
+    # #     print("second if")
+    # #     return {"errors": "file type not permitted"}, 400
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    # image.filename = get_unique_filename(image.filename)
 
-    image.filename = get_unique_filename(image.filename)
+    # print("this is image.filename", image.filename)
 
-    print("this is image.filename", image.filename)
+    # upload = upload_file_to_s3(image)
 
-    upload = upload_file_to_s3(image)
+    # print("this is upload", upload)
 
-    print("this is upload", upload)
+    # if "url" not in upload:
+    #     # if the dictionary doesn't have a url key
+    #     # it means that there was an error when we tried to upload
+    #     # so we send back that error message
+    #     return upload, 400
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
-
-    url = upload["url"]
+    # url = upload["url"]
 
     if form.validate_on_submit():
         new_host = Host(
@@ -89,7 +96,7 @@ def create_host():
             lat=form.data["lat"],
             lng=form.data["lng"],
             price_per_night=form.data["price_per_night"],
-            img_url=url,
+            img_url=form.data["img_url"],
         )
         db.session.add(new_host)
         db.session.commit()
@@ -115,36 +122,36 @@ def create_host():
         return {"errors": validation_errors_to_error_messages(form.errors)}, 400
 
 
-@host_routes.put("/int:host_id/image")
-@login_required
-def put_host_image(host_id):
-    """
-    updates the host image to AWS
-    """
-    if "image" not in request.files:
-        return {"errors": "image required"}, 400
+# @host_routes.put("/int:host_id/image")
+# @login_required
+# def put_host_image(host_id):
+#     """
+#     updates the host image to AWS
+#     """
+#     if "image" not in request.files:
+#         return {"errors": "image required"}, 400
 
-    image = request.files["image"]
+#     image = request.files["image"]
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+#     if not allowed_file(image.filename):
+#         return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
+#     image.filename = get_unique_filename(image.filename)
 
-    upload = upload_file_to_s3(image)
+#     upload = upload_file_to_s3(image)
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
+#     if "url" not in upload:
+#         # if the dictionary doesn't have a url key
+#         # it means that there was an error when we tried to upload
+#         # so we send back that error message
+#         return upload, 400
 
-    url = upload["url"]
-    # flask_login allows us to get the current user from the request
-    new_image = Image(user=current_user, url=url)
-    db.session.add(new_image)
-    db.session.commit()
-    return {"url": url}
+#     url = upload["url"]
+#     # flask_login allows us to get the current user from the request
+#     host_id=current_user
+#     db.session.add(new_image)
+#     db.session.commit()
+#     return {"url": url}
 
 
 @host_routes.put("/<int:host_id>")

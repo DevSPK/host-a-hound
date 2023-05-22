@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkAddHost } from "../../store/host";
 import "./AddHost.css"
+import UploadHostPicture from "../UploadHostPicture";
+import UploadImage from "../UploadImage";
 
 const AddHost = () => {
     const [name, setName] = useState("");
@@ -74,7 +76,7 @@ const AddHost = () => {
        
 
         setErrors(errorsArr)
-    }, [name, about, price_per_night, address, city, state, country, img_url])
+    }, [name, about, price_per_night, address, city, state, country])
 
     // function isImgUrl(url) {
 
@@ -97,18 +99,59 @@ const AddHost = () => {
       const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
-        console.log("this is image", image)
+        console.log("this is image in updateImage", image)
+
+        
+
     }
+
+
+  
 
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+       
 
-        setImageLoading(true);
+        
+    // const formData = new FormData();
+    //     formData.append("image", image);
+    //     console.log("this is image in handleSumbit", image)
+    //     setImageLoading(true);
+    //     console.log("this is form.data", formData)
+    //     for (const [key, value] of formData.entries()) {
+    //         console.log(`${key}: ${value}`);
+    //       }
+    //     console.log("-------formData at image", formData["image"])
+        
+    //     if (formData.enctype === 'multipart/form-data') {
+    //         console.log('Form is multipart');
+    //       } else {
+    //         console.log('Form is not multipart');
+    //       }
+
+    //     const res = await fetch('http://localhost:5000/', {
+    //         method: "POST",
+    //         body: formData,
+    //     });
+    //     console.log("this is res", res)
+    //     if (res.ok) {
+    //         console.log("this is response from api/", res)
+    //         await res.json();
+    //         setImageLoading(false);
+    //         history.push("/images");
+    //     }
+    //     else {
+    //         setImageLoading(false);
+    //         // a real app would probably use more advanced
+    //         // error handling
+    //         console.log("error not getting res");
+    //     }
+  
 
         if (errors.length === 0) {
             let hostInfo = {
-                name, about, price_per_night, address, city, state, country, img_url:image, lat, lng
+                name, about, price_per_night, address, city, state, country, img_url, lat, lng
             }
             
             setSubmitted(true)
@@ -136,6 +179,7 @@ const AddHost = () => {
     return (
         <div className="add-host-form-wrapper">
             <form onSubmit={handleSubmit} className='add-host-form'>
+                
                 <h1>Add a new host</h1>
                 {/* {errors.length > 0 && <ul className="add-host-form-errors">
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -205,22 +249,18 @@ const AddHost = () => {
                         maxLength={50}
                     />
                 </div>
-                <div className="add-host-form-item">
-                    <label>
-                        Image URL
+                {/* <div className="add-host-form-item">
+                <label>
+                        Image
                     </label>
                     <input
-                        
-                        type="file"
-                        accept="image/*"
-                        onChange={updateImage}
-                        required
-                        minLength={1}
-                        maxLength={2048}
-                        // placeholder="Image URL"
-                    />
+                    type="file"
+                    accept="image/*"
+                    onChange={updateImage}
+                    /> 
                     {(imageLoading)&& <p>Loading...</p>}
-                </div>
+                </div> */}
+               <UploadImage/>
                 <div className="add-host-form-item">
                     <label>
                         Price per night
