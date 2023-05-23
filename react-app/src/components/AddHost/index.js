@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkAddHost } from "../../store/host";
+import UploadPicture from "../UploadPicture";
 import "./AddHost.css"
 
 const AddHost = () => {
@@ -59,22 +60,29 @@ const AddHost = () => {
         //     });
         //   }
 
+        // function isImgUrl(url) {
+        //     return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+        //   }
         
-        
-        if (!(name && about && price_per_night && address && city && state && country)) errorsArr.push("All fields must be filled out")
-        if (name && (name.length < 5 || name.length > 75)) errorsArr.push("Host name must be between 5 and 75 characters")
-        if (address && (address.length < 10 || address.length) > 150) errorsArr.push("Host address must be between 10 and 150 characters")
-        if (city && (city.length < 5 ||  city.length > 75)) errorsArr.push("Host city must be between 5 and 75 characters")
-        if (state && (state.length < 2 || state.length > 25)) errorsArr.push("Host state must be between 2 and 25 characters")
-        if (country && (country.length < 2 || country.length > 50)) errorsArr.push("Host country must be between 2 and 50 characters")
-        // if (!isImgUrl(img_url)) errorsArr.push("Please enter a valid imgage URL")
-        if (about && (about.length < 10 || about.length > 2000)) errorsArr.push("About must be at least 10 characters and less than 2000 characters")
+
+        if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
+        if (name && name.length > 75) errorsArr.push("Host name must be less than 75 characters")
+        if (address && address.length > 150) errorsArr.push("Host address must be less than 150 characters")
+        if (city && city.length > 75) errorsArr.push("Host city must be less than 75 characters")
+        if (state && state.length > 25) errorsArr.push("Host state must be less than 25 characters")
+        if (country && country.length > 50) errorsArr.push("Host country must be less than 50 characters")
+        // if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
+        if (about && about.length > 2000) errorsArr.push("Host about must be less than 2000 characters")
         if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
         
        
 
         setErrors(errorsArr)
-    }, [name, about, price_per_night, address, city, state, country, img_url])
+    }, [name, about, price_per_night, address, city, state, country])
+
+    const handleImageUpload = (imageUrl) => {
+        setImg_url(imageUrl); // Update the img_url state with the provided image URL
+    };
 
     // function isImgUrl(url) {
 
@@ -124,10 +132,7 @@ const AddHost = () => {
             return setErrors(errors)
         }
 
-        
-
-        
-        
+        history.push(`/`)
         
        
     }
@@ -205,21 +210,9 @@ const AddHost = () => {
                         maxLength={50}
                     />
                 </div>
-                <div className="add-host-form-item">
-                    <label>
-                        Image URL
-                    </label>
-                    <input
-                        
-                        type="file"
-                        accept="image/*"
-                        onChange={updateImage}
-                        required
-                        minLength={1}
-                        maxLength={2048}
-                        // placeholder="Image URL"
-                    />
-                    {(imageLoading)&& <p>Loading...</p>}
+                <div>
+                <label>Image</label>
+                    <UploadPicture handleImageUpload={handleImageUpload} /> {/* Pass handleImageUpload as a prop */}
                 </div>
                 <div className="add-host-form-item">
                     <label>
