@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkAddHost } from "../../store/host";
+import UploadPicture from "../UploadPicture";
 import "./AddHost.css"
 
 const AddHost = () => {
@@ -56,9 +57,9 @@ const AddHost = () => {
         //     });
         //   }
 
-        function isImgUrl(url) {
-            return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
-          }
+        // function isImgUrl(url) {
+        //     return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
+        //   }
         
 
         if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
@@ -67,13 +68,17 @@ const AddHost = () => {
         if (city && city.length > 75) errorsArr.push("Host city must be less than 75 characters")
         if (state && state.length > 25) errorsArr.push("Host state must be less than 25 characters")
         if (country && country.length > 50) errorsArr.push("Host country must be less than 50 characters")
-        if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
+        // if (img_url && (isImgUrl(img_url))) errorsArr.push("Please enter a valid imgage URL")
         if (about && about.length > 2000) errorsArr.push("Host about must be less than 2000 characters")
         if (price_per_night && (!parsedPrice || !Number(price_per_night) || parsedPrice <= 0)) errorsArr.push('Price must be greater than zero')
         
 
         setErrors(errorsArr)
-    }, [name, about, price_per_night, address, city, state, country, img_url])
+    }, [name, about, price_per_night, address, city, state, country])
+
+    const handleImageUpload = (imageUrl) => {
+        setImg_url(imageUrl); // Update the img_url state with the provided image URL
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -92,7 +97,7 @@ const AddHost = () => {
        
         
 
-           await history.push(`/`)
+        history.push(`/`)
         
        
     }
@@ -170,17 +175,8 @@ const AddHost = () => {
                     />
                 </div>
                 <div>
-                    <label>
-                        Image URL
-                    </label>
-                    <input
-                        type="text"
-                        value={img_url}
-                        onChange={(e) => setImg_url(e.target.value)}
-                        required
-                        minLength={1}
-                        maxLength={2048}
-                    />
+                <label>Image</label>
+                    <UploadPicture handleImageUpload={handleImageUpload} /> {/* Pass handleImageUpload as a prop */}
                 </div>
                 <div>
                     <label>
