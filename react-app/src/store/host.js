@@ -98,33 +98,67 @@ export const thunkGetOneHost = (hostId) => async (dispatch) => {
     }
 };
 
+// export const thunkAddHost = (host) => async (dispatch) => {
+//     const { name, about, price_per_night, address, city, state, country, img_url, lat, lng } = host;
+//     const hostResponse = await fetch("api/host/", {
+//         method: "POST",
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             name, about, price_per_night, address, city, state, country, img_url, lat, lng
+//         })
+//     });
+
+//     if (hostResponse.ok) {
+//         const data = await hostResponse.json();
+
+//             dispatch(actionCreateHost(data));
+//             return hostResponse;
+//         } else if (hostResponse.status < 500) {
+//             const data = await hostResponse.json();
+//             if (data.errors) {
+//                 return data.errors;
+//             }
+//         } else {
+//             return ['An error occurred. Please try again.']
+//         }
+//     }
+// };
+
 export const thunkAddHost = (host) => async (dispatch) => {
     const { name, about, price_per_night, address, city, state, country, img_url, lat, lng } = host;
-    const hostResponse = await fetch("api/host/", {
+    
+    try {
+      const hostResponse = await fetch("api/host/", {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name, about, price_per_night, address, city, state, country, img_url, lat, lng
+          name, about, price_per_night, address, city, state, country, img_url, lat, lng
         })
-    });
-
-    if (hostResponse.ok) {
+      });
+  
+      if (hostResponse.ok) {
         const data = await hostResponse.json();
-
-            dispatch(actionCreateHost(data));
-            return hostResponse;
-        } else if (hostResponse.status < 500) {
-            const data = await hostResponse.json();
-            if (data.errors) {
-                return data.errors;
-            }
+        dispatch(actionCreateHost(data));
+        return Promise.resolve(data);
+      } else {
+        const data = await hostResponse.json();
+        if (hostResponse.status < 500 && data.errors) {
+          return Promise.reject(data.errors);
         } else {
-            return ['An error occurred. Please try again.']
+          return Promise.reject(['An error occurred. Please try again.']);
         }
+      }
+    } catch (error) {
+      console.error('Failed to add host:', error);
+      return Promise.reject(['An error occurred. Please try again.']);
     }
-// };
+  };
+
+  
 
 export const thunkUpdateHost = (host) => async (dispatch) => {
     const { id, name, about, price_per_night, address, city, state, country, img_url, lat, lng } = host;

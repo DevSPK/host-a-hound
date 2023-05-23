@@ -39,30 +39,6 @@ const AddHost = () => {
         let errorsArr = []
 
         
-        // async function isImgUrl(url) {
-        //     const res = await fetch(url, { method: 'HEAD' });
-
-        //     if (res.ok) {
-
-        //         return res.headers.get('Content-Type').startsWith('image');
-        //     }else{
-        //         return false
-        //     }
-            
-        //   }
-
-        // function isImgUrl(url) {
-        //     const img = new Image();
-        //     img.src = url;
-        //     return new Promise((resolve) => {
-        //       img.onload = () => resolve(true);
-        //       img.onerror = () => resolve(false);
-        //     });
-        //   }
-
-        // function isImgUrl(url) {
-        //     return /\.(jpg|jpeg|png|webp|avif|gif)$/.test(url)
-        //   }
         
 
         if (!(name && about && price_per_night && address && city && state && country && img_url)) errorsArr.push("All fields must be filled out")
@@ -84,29 +60,8 @@ const AddHost = () => {
         setImg_url(imageUrl); // Update the img_url state with the provided image URL
     };
 
-    // function isImgUrl(url) {
-
-    //     let checkURL = (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(url)
-        
-    //     if (url === null) {
-    //         return false
-    //     }
-    //     // console.log(checkURL)
-
-    //     if (checkURL) {
-    //         return true
-    //     }
-
-    //     else {return false}
-    //   }
 
 
-
-      const updateImage = (e) => {
-        const file = e.target.files[0];
-        setImage(file);
-        console.log("this is image", image)
-    }
 
 
     const handleSubmit = async (e) => {
@@ -116,16 +71,18 @@ const AddHost = () => {
 
         if (errors.length === 0) {
             let hostInfo = {
-                name, about, price_per_night, address, city, state, country, img_url:image, lat, lng
+                name, about, price_per_night, address, city, state, country, img_url, lat, lng
             }
             
             setSubmitted(true)
             
-            await dispatch(thunkAddHost(hostInfo))
-       
-        
-            setImageLoading(false);
-            await history.push(`/`)
+            try {
+                await dispatch(thunkAddHost(hostInfo));
+                history.push('/');
+              } catch (errors) {
+                console.error('Failed to add host:', errors);
+                // handle the errors
+              }
             return
         } else {
             setImageLoading(false);
